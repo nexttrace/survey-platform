@@ -32,7 +32,7 @@ module NextTrace
     config.generators do |generate|
       generate.assets false
       generate.helper false
-      generate.system_tests false
+      generate.system_tests nil
       generate.view_specs false
     end
   end
