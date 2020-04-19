@@ -15,7 +15,7 @@
         <div class="navbar-brand">
           <%= link_to "/", class: "navbar-item" do %>
             <%= image_tag("nexttrace-logo.svg", width: 40, height: 40) %>
-            NextTrace Survey
+            NextTrace
           <% end %>
 
           <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-burger">
@@ -27,6 +27,10 @@
 
         <div id="navbar-menu" class="navbar-menu">
           <div class="navbar-end">
+            <%= link_to "Survey", survey_path, class: "navbar-item" %>
+
+            <%= link_to "Public Health", organizations_path, class: "navbar-item" %>
+
             <a class="navbar-item">
               About
             </a>

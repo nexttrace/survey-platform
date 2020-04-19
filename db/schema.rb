@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_074418) do
+ActiveRecord::Schema.define(version: 2020_04_19_074107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "county"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "passwordless_sessions", force: :cascade do |t|
     t.string "authenticatable_type"
@@ -29,4 +38,24 @@ ActiveRecord::Schema.define(version: 2020_04_18_074418) do
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organization_id"
+    t.jsonb "response_data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_responses_on_organization_id"
+    t.index ["user_id"], name: "index_responses_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "responses", "organizations"
+  add_foreign_key "responses", "users"
 end
