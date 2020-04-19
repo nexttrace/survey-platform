@@ -54,4 +54,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { host: ENV.fetch("DOMAIN", "localhost:3000") }
+
+  config.hosts << "nexttrace.test"
 end
