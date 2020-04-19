@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+$text: #000;
+$family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+$navbar-item-img-max-height: 40px;
+$navbar-breakpoint: 839px;
+$navbar-height: 5.5rem;
+
+$footer-background-color: false;
+$footer-padding: 3rem 0;
+
+@import "~bulma/bulma";
+
+.navbar-brand {
+	margin-left: 0.5rem;
+}
+
+.navbar-menu {
+	margin-right: 0.5rem;
+}
+
+.navbar-menu.is-active {
+	text-align: right;
+
+	.navbar-item {
+		font-size: 150%;
+	}
+}
+
+.navbar-brand img {
+	margin-right: 0.75rem;
+}
+
+.navbar-item {
+	font-weight: bold;
+}
