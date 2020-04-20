@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
-  passwordless_for :users, at: "/"
+  passwordless_for :respondants, at: "/survey"
 
-  get "survey", to: "survey#index"
-  resources :responses
-  resources :organizations
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+  }
 
+  get "survey", to: "survey/index"
   root "home#index"
 end
