@@ -1,13 +1,46 @@
-<h2>Sign up</h2>
+<h2>Sign up your public health organization</h2>
 
 <div class="columns">
   <div class="column">
     <div class="box">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource.organization %>
+        <%= f.fields_for :organization do |o| %>
+          <div class="field">
+            <%= o.label :name, "Organization Name", class: "label" %>
+            <div class="control">
+              <%= o.text_field :name, class: "input" %>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= o.label :city, "Organization City", class: "label" %>
+            <div class="control">
+              <%= o.text_field :city, autocomplete: "city", class: "input" %>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= o.label :county, "Organization County", class: "label" %>
+            <div class="control">
+              <%= o.text_field :county, autocomplete: "county", class: "input" %>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= o.label :state, "Organization State", class: "label" %>
+            <div class="control">
+              <div class="select">
+                <%= o.select :state, CS.states(:us), autocomplete: "state", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
-          <%= f.label :email, class: "label" %>
+          <%= f.label :email, "Email address", class: "label" %>
           <div class="control">
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
           </div>
@@ -29,39 +62,6 @@
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
           </div>
         </div>
-
-        <%= render "devise/shared/error_messages", resource: resource.organization %>
-        <%= f.fields_for :organization do |o| %>
-          <div class="field">
-            <%= o.label :name, class: "label" %>
-            <div class="control">
-              <%= o.text_field :name, class: "input" %>
-            </div>
-          </div>
-
-          <div class="field">
-            <%= o.label :city, class: "label" %>
-            <div class="control">
-              <%= o.text_field :city, autocomplete: "city", class: "input" %>
-            </div>
-          </div>
-
-          <div class="field">
-            <%= o.label :county, class: "label" %>
-            <div class="control">
-              <%= o.text_field :county, autocomplete: "county", class: "input" %>
-            </div>
-          </div>
-
-          <div class="field">
-            <%= o.label :state, class: "label" %>
-            <div class="control">
-              <div class="select">
-                <%= o.select :state, CS.states(:us), autocomplete: "state", include_blank: true %>
-              </div>
-            </div>
-          </div>
-        <% end %>
 
         <div class="field is-grouped">
           <div class="control">
