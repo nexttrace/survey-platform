@@ -27,9 +27,9 @@
 
         <div id="navbar-menu" class="navbar-menu">
           <div class="navbar-end">
-            <%= link_to "Survey", survey_path, class: "navbar-item" %>
+            <%= link_to "Take Survey", survey_path, class: "navbar-item" %>
 
-            <%= link_to "Public Health", organizations_path, class: "navbar-item" %>
+            <%= link_to "Public Health", new_user_session_path, class: "navbar-item" %>
 
             <a class="navbar-item">
               About
@@ -38,13 +38,21 @@
             <a class="navbar-item">
               Contact
             </a>
+
+            <%- if current_user -%>
+              <div class="navbar-item">
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "button primary" %>
+              </div>
+            <%- end -%>
           </div>
         </div>
       </div>
     </nav>
 
     <div class="container">
-      <%= yield %>
+      <div class="content">
+        <%= yield %>
+      </div>
     </section>
 
     <footer class="footer">

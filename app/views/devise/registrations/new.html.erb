@@ -21,6 +21,29 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <%= render "devise/shared/error_messages", resource: resource.organization %>
+  <%= f.fields_for :organization do |o| %>
+    <div class="field">
+      <%= o.label :name %><br />
+      <%= o.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= o.label :city %><br />
+      <%= o.text_field :city, autocomplete: "city" %>
+    </div>
+
+    <div class="field">
+      <%= o.label :county %><br />
+      <%= o.text_field :county, autocomplete: "county" %>
+    </div>
+
+    <div class="field">
+      <%= o.label :state %><br />
+      <%= o.select :state, CS.states(:us), autocomplete: "state", include_blank: true %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

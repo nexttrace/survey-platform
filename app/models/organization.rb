@@ -11,4 +11,10 @@
 #  updated_at :datetime         not null
 #
 class Organization < ApplicationRecord
+  validates :city, presence: true
+  validates :county, presence: true
+  validates :name, presence: true
+  validates :state, presence: true
+
+  has_many :users
 end
