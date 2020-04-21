@@ -10,4 +10,8 @@ private
     stored_location_for(resource) || dashboard_path
   end
 
+  def twilio
+    Rails.application.config.twilio
+  end
+
 end

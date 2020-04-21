@@ -21,8 +21,8 @@
 class SurveyInvitation < ApplicationRecord
   validates :organization, presence: true
   validates :name, presence: true
-  validates :phone, presence: true
-  validates :email, presence: true
+  validates :phone, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   belongs_to :organization
 end

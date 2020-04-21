@@ -10,9 +10,12 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.1"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 4.0"
+gem "city-state", "~> 0.1.0"
+gem "twilio-ruby", "~> 5.33"
 
 group :development, :test do
   gem "annotate", "~> 3.1"
+  gem "dotenv-rails", "~> 2.7"
   gem "pry-byebug", "~> 3.9"
   gem "rspec-rails", "~> 4.0"
 end
@@ -23,5 +26,3 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", ">= 3.3.0"
 end
-
-gem "city-state", "~> 0.1.0"
