@@ -1,0 +1,8 @@
+<% content_for :head do %>
+  <%= javascript_pack_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<h1>Tracing Dashboard</h1>
+<h3><%= @organization.name %></h3>
+
+<div id="chart"></div>

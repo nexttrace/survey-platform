@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   }
 
   get "survey", to: "survey#index"
+  get "dashboard", to: "dashboard#index"
   root to: "home#index"
 end
