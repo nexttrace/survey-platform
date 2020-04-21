@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_020421) do
+ActiveRecord::Schema.define(version: 2020_04_21_074232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "invitations", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.bigint "organization_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["organization_id"], name: "index_invitations_on_organization_id"
-  end
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
@@ -73,7 +63,10 @@ ActiveRecord::Schema.define(version: 2020_04_21_020421) do
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "token"
+    t.index ["email"], name: "index_survey_invitations_on_email", unique: true
     t.index ["organization_id"], name: "index_survey_invitations_on_organization_id"
+    t.index ["phone"], name: "index_survey_invitations_on_phone", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,7 +88,6 @@ ActiveRecord::Schema.define(version: 2020_04_21_020421) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "invitations", "organizations"
   add_foreign_key "responses", "organizations"
   add_foreign_key "responses", "respondents"
   add_foreign_key "survey_invitations", "organizations"
