@@ -4,14 +4,15 @@ ruby Pathname.new(".ruby-version").expand_path(__dir__).read.gsub("ruby-", "")
 gem "rails", "~> 6.0.2", ">= 6.0.2.2"
 
 gem "bootsnap", ">= 1.4.2", require: false
+gem "city-state", "~> 0.1.0"
 gem "devise", "~> 4.7"
+gem "nilify_blanks", "~> 1.4"
 gem "passwordless", "~> 0.9.0"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.1"
 gem "turbolinks", "~> 5"
-gem "webpacker", "~> 4.0"
-gem "city-state", "~> 0.1.0"
 gem "twilio-ruby", "~> 5.33"
+gem "webpacker", "~> 4.0"
 
 group :development, :test do
   gem "annotate", "~> 3.1"

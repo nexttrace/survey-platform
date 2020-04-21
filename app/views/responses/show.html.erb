@@ -1,16 +1,18 @@
+<p id="notice"><%= notice %></p>
+
 <p>
-  <strong>User:</strong>
-  <%= @response.user_id %>
+  <strong>Data:</strong>
+  <%= @response.data %>
 </p>
 
 <p>
   <strong>Organization:</strong>
-  <%= @response.organization %>
+  <%= @response.organization_id %>
 </p>
 
 <p>
-  <strong>Response data:</strong>
-  <%= @response.response_data %>
+  <strong>Respondent:</strong>
+  <%= @response.respondent_id %>
 </p>
 
 <%= link_to 'Edit', edit_response_path(@response) %> |

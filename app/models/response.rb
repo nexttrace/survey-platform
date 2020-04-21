@@ -6,8 +6,8 @@
 #  data            :jsonb
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  organization_id :bigint
-#  respondent_id   :bigint
+#  organization_id :bigint           not null
+#  respondent_id   :bigint           not null
 #
 # Indexes
 #
@@ -20,4 +20,6 @@
 #  fk_rails_...  (respondent_id => respondents.id)
 #
 class Response < ApplicationRecord
+  belongs_to :organization
+  belongs_to :respondent
 end

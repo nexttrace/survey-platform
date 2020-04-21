@@ -6,8 +6,8 @@
 #  data            :jsonb
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  organization_id :bigint
-#  respondent_id   :bigint
+#  organization_id :bigint           not null
+#  respondent_id   :bigint           not null
 #
 # Indexes
 #

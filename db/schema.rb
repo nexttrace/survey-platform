@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_074232) do
+ActiveRecord::Schema.define(version: 2020_04_21_202851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,14 +42,16 @@ ActiveRecord::Schema.define(version: 2020_04_21_074232) do
     t.string "name"
     t.string "email"
     t.string "phone"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "survey_invitation_id", null: false
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_respondents_on_organization_id"
+    t.index ["survey_invitation_id"], name: "index_respondents_on_survey_invitation_id"
   end
 
   create_table "responses", force: :cascade do |t|
-    t.bigint "respondent_id"
-    t.bigint "organization_id"
     t.jsonb "data"
+    t.bigint "organization_id", null: false
+    t.bigint "respondent_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_responses_on_organization_id"
@@ -64,9 +66,11 @@ ActiveRecord::Schema.define(version: 2020_04_21_074232) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "token"
+    t.datetime "used_at"
     t.index ["email"], name: "index_survey_invitations_on_email", unique: true
     t.index ["organization_id"], name: "index_survey_invitations_on_organization_id"
     t.index ["phone"], name: "index_survey_invitations_on_phone", unique: true
+    t.index ["token"], name: "index_survey_invitations_on_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -88,6 +92,8 @@ ActiveRecord::Schema.define(version: 2020_04_21_074232) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "respondents", "organizations"
+  add_foreign_key "respondents", "survey_invitations"
   add_foreign_key "responses", "organizations"
   add_foreign_key "responses", "respondents"
   add_foreign_key "survey_invitations", "organizations"

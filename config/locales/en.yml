@@ -36,3 +36,7 @@ en:
       subject: "COVID-19 Test Result Notification"
     contact_email:
       subject: "COVID-19 Contact Notification"
+  passwordless:
+    sessions:
+      new:
+        submit: "Email link to survey"

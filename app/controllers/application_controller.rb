@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
 private
 
+  # agency auth helpers
   def require_organization!
     authenticate_user! && @organization = current_user.organization
   end
@@ -10,6 +11,7 @@ private
     stored_location_for(resource) || dashboard_path
   end
 
+  # non-user stuff
   def twilio
     Rails.application.config.twilio
   end

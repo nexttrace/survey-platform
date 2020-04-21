@@ -28,7 +28,7 @@
 
         <div id="navbar-menu" class="navbar-menu">
           <div class="navbar-end">
-            <%= link_to "Take Survey", surveys_path, class: "navbar-item" %>
+            <%= link_to "Take Survey", respondents.sign_in_path, class: "navbar-item" %>
 
             <%= link_to "Public Health", dashboard_path, class: "navbar-item" %>
 
@@ -55,7 +55,7 @@
       <%= tag.div flash.alert, class: "notification is-danger" if flash.key?(:alert) %>
 
       <div class="content">
-        <%= yield %>
+        <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
     </section>
 
