@@ -2,17 +2,40 @@
   <%= javascript_pack_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
-<h1>Tracing Dashboard</h1>
-<h3><%= @organization.name %></h3>
+<h2><%= @organization.name %> Dashboard</h2>
+
+<br>
 
 <div class="field is-grouped">
   <div class="control">
-    <%= link_to "Report positive test and initiate survey", new_survey_invitation_path, class: "button is-link" %>
+    <%= link_to "Report positive test and send survey", new_survey_invitation_path, class: "button is-outlined" %>
   </div>
 
   <div class="control">
-    <%= link_to "View pending survey invitations", survey_invitations_path, class: "button is-link is-light" %>
+    <%= link_to "View unused survey invitations", survey_invitations_path, class: "button is-link" %>
   </div>
 </div>
 
-<div id="chart"></div>
+<br><br>
+
+<div class="container">
+  <p>
+    <b>16</b> contacts reported total &nbsp; / &nbsp;
+    <b>33</b> positive test results total
+  </p>
+
+  <p>
+    <b>35</b> surveys complete out of <b>83</b> survey invitations sent
+  </p>
+
+  <p>
+    <progress class="progress is-primary" value="42" max="100">42%</progress>
+  </p>
+</div>
+
+<br><br><br>
+
+<div class="container">
+  <h3>Daily totals</h3>
+  <div id="chart"></div>
+</div>
