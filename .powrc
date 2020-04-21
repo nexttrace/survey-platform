@@ -1,2 +1,4 @@
+export DEFAULT_URL_HOST=nexttrace.test
+
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 chruby $(cat .ruby-version)
