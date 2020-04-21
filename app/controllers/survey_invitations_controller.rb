@@ -26,17 +26,22 @@ class SurveyInvitationsController < ApplicationController
     SurveyInvitation.transaction do
       @survey_invitation = @organization.survey_invitations.new(survey_invitation_params)
 
-      if twilio.enabled?
-        sms_message = "Gotham Public Health: Unfortunately, you have tested positive for COVID-19. Please self-isolate for 7 days or until 3 days after you are completely better.\n\nTo help us stop COVID-19, please take this 10 minute survey to tell us who you have had contact with: #{survey_url}"
-
-        twilio.client.messages.create(
-          from: twilio.phone_number,
-          to: @survey_invitation.phone,
-          body: sms_message
-        )
-      end
-
       if @survey_invitation.save
+
+        if @survey_invitation.phone && twilio.enabled?
+          sms_message = "Gotham Public Health: Unfortunately, you have tested positive for COVID-19. Please self-isolate for 7 days or until 3 days after you are completely better.\n\nTo help us stop COVID-19, please take this survey to tell us who you have had contact with: #{survey_url(@survey_invitation.token)}"
+
+          twilio.client.messages.create(
+            from: twilio.phone_number,
+            to: @survey_invitation.phone,
+            body: sms_message
+          )
+        end
+
+        if @survey_invitation.email
+          SurveyInvitationMailer.with(survey_invitation: @survey_invitation).notification_email.deliver_later
+        end
+
         redirect_to @survey_invitation, notice: "Survey invitation was successfully created."
       else
         render :new

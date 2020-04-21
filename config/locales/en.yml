@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  survey_invitation_mailer:
+    notification_email:
+      subject: "COVID-19 Test Result Notification"
+    contact_email:
+      subject: "COVID-19 Contact Notification"

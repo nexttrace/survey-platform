@@ -1,0 +1,9 @@
+Notice from <%= @organization.name %>
+
+Hello <%= @survey_invitation.name %>,
+
+We are sorry to inform you that you have tested positive for COVID-19. We ask that you <b>please self-isolate for the next 7 days</b>, or until 3 days after your symptoms have completely resolved, whichever is longer. If your symptoms get worse, please phone your primary care practitioner to seek guidance before going to the hospital.
+
+In an effort to stop transmission of COVID-19, the public health department is asking individuals who have COVID-19 to answer a 10 minute survey to find people you may have had contact with while you were infectious. Your participation will help us find other people who might have COVID-19 before they transmit their infection to someone else. Please take the survey by visiting this link:
+
+<%= survey_url(@survey_invitation.token) %>
