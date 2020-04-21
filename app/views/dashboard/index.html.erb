@@ -5,4 +5,14 @@
 <h1>Tracing Dashboard</h1>
 <h3><%= @organization.name %></h3>
 
+<div class="field is-grouped">
+  <div class="control">
+    <%= link_to "Report positive test and initiate survey", new_survey_invitation_path, class: "button is-link" %>
+  </div>
+
+  <div class="control">
+    <%= link_to "View pending survey invitations", survey_invitations_path, class: "button is-link is-light" %>
+  </div>
+</div>
+
 <div id="chart"></div>

@@ -51,6 +51,9 @@
     </nav>
 
     <div class="container">
+      <%= tag.div flash.notice, class: "notification is-success" if flash.key?(:notice) %>
+      <%= tag.div flash.alert, class: "notification is-danger" if flash.key?(:alert) %>
+
       <div class="content">
         <%= yield %>
       </div>

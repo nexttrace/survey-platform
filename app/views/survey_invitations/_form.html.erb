@@ -1,0 +1,35 @@
+<% if survey_invitation.errors.any? %>
+  <article class="message is-danger">
+    <div class="message-header">
+      <p>Couldn't save survey invitation</p>
+    </div>
+    <div class="message-body">
+      <ul>
+        <% survey_invitation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  </article>
+<% end %>
+
+<div class="field">
+  <%= form.label :name, class: "label" %>
+  <div class="control">
+    <%= form.text_field :name, class: "input", placeholder: "Patient Name" %>
+  </div>
+</div>
+
+<div class="field">
+  <%= form.label :email, class: "label" %>
+  <div class="control">
+    <%= form.email_field :email, class: "input", placeholder: "patient.name@example.com" %>
+  </div>
+</div>
+
+<div class="field">
+  <%= form.label :phone, class: "label" %>
+  <div class="control">
+    <%= form.phone_field :phone, class: "input", placeholder: "555-555-5555" %>
+  </div>
+</div>

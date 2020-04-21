@@ -1,0 +1,30 @@
+<h1>Survey Invitations</h1>
+
+<div class="field is-grouped">
+  <div class="control">
+    <%= link_to "Report positive test and initiate survey", new_survey_invitation_path, class: "button is-link" %>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @survey_invitations.each do |survey_invitation| %>
+      <tr>
+        <td><%= survey_invitation.name %></td>
+        <td><%= survey_invitation.email %></td>
+        <td><%= survey_invitation.phone %></td>
+        <td><%= link_to 'Edit', edit_survey_invitation_path(survey_invitation) %></td>
+        <td><%= link_to 'Destroy', survey_invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

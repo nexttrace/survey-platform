@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :survey_invitations
   passwordless_for :respondants
 
   devise_for :users, controllers: {

@@ -1,52 +1,78 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="columns">
+  <div class="column">
+    <div class="box">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <div class="field">
+          <%= f.label :email, class: "label" %>
+          <div class="control">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+        <div class="field">
+          <%= f.label :password, class: "label" %>
+          <div class="control">
+            <%= f.password_field :password, autocomplete: "new-password", class: "input" %>
+            <% if @minimum_password_length %>
+              <p class="help">(<%= @minimum_password_length %> characters minimum)</p>
+            <% end %>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <div class="field">
+          <%= f.label :password_confirmation, class: "label" %>
+          <div class="control">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
+          </div>
+        </div>
 
-  <%= render "devise/shared/error_messages", resource: resource.organization %>
-  <%= f.fields_for :organization do |o| %>
-    <div class="field">
-      <%= o.label :name %><br />
-      <%= o.text_field :name %>
+        <%= render "devise/shared/error_messages", resource: resource.organization %>
+        <%= f.fields_for :organization do |o| %>
+          <div class="field">
+            <%= o.label :name, class: "label" %>
+            <div class="control">
+              <%= o.text_field :name, class: "input" %>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= o.label :city, class: "label" %>
+            <div class="control">
+              <%= o.text_field :city, autocomplete: "city", class: "input" %>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= o.label :county, class: "label" %>
+            <div class="control">
+              <%= o.text_field :county, autocomplete: "county", class: "input" %>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= o.label :state, class: "label" %>
+            <div class="control">
+              <div class="select">
+                <%= o.select :state, CS.states(:us), autocomplete: "state", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <%= f.submit "Sign up", class: "button is-link" %>
+          </div>
+        </div>
+      <% end %>
+
+      <br>
+      <%= render "devise/shared/links" %>
     </div>
-
-    <div class="field">
-      <%= o.label :city %><br />
-      <%= o.text_field :city, autocomplete: "city" %>
-    </div>
-
-    <div class="field">
-      <%= o.label :county %><br />
-      <%= o.text_field :county, autocomplete: "county" %>
-    </div>
-
-    <div class="field">
-      <%= o.label :state %><br />
-      <%= o.select :state, CS.states(:us), autocomplete: "state", include_blank: true %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <div class="column"></div>
+</div>

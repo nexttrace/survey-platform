@@ -17,4 +17,5 @@ class Organization < ApplicationRecord
   validates :state, presence: true
 
   has_many :users
+  has_many :survey_invitations
 end
