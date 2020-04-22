@@ -27,21 +27,8 @@ class SurveyInvitationsController < ApplicationController
       @survey_invitation = @organization.survey_invitations.new(survey_invitation_params)
 
       if @survey_invitation.save
-
-        if @survey_invitation.phone && twilio.enabled?
-          sms_message = "Gotham Public Health: Unfortunately, you have tested positive for COVID-19. Please self-isolate for 7 days or until 3 days after you are completely better.\n\nTo help us stop COVID-19, please take this survey to tell us who you have had contact with: #{code_url(@survey_invitation.token)}"
-
-          twilio.client.messages.create(
-            from: twilio.phone_number,
-            to: @survey_invitation.phone,
-            body: sms_message
-          )
-        end
-
-        if @survey_invitation.email
-          SurveyInvitationMailer.with(survey_invitation: @survey_invitation).notification_email.deliver_later
-        end
-
+        invite_sms(@survey_invitation)
+        invite_email(@survey_invitation)
         redirect_to @survey_invitation, notice: "Survey invitation was successfully created."
       else
         render :new
@@ -75,6 +62,27 @@ private
   # Only allow a trusted parameter "white list" through.
   def survey_invitation_params
     params.require(:survey_invitation).permit(:name, :email, :phone)
+  end
+
+  def invite_sms(si)
+    return unless si.phone && twilio.enabled?
+
+    sms_message = "Gotham Public Health: Unfortunately, you have tested positive for COVID-19. Please self-isolate for 7 days or until 3 days after you are completely better.\n\nTo help us stop COVID-19, please take this survey to tell us who you have had contact with: #{code_url(@survey_invitation.token)}"
+
+    twilio.client.messages.create(
+      from: twilio.phone_number,
+      to: si.phone,
+      body: sms_message
+    )
+  rescue
+    flash.error = "SMS invitation could not be sent"
+  end
+
+  def invite_email(si)
+    return unless si.email
+    SurveyInvitationMailer.with(survey_invitation: @survey_invitation).notification_email.deliver_later
+  rescue
+    flash.error = "Invitation email could not be sent"
   end
 
 end
