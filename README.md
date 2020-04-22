@@ -10,14 +10,19 @@ Automated contact tracing for public health agencies.
 
 ### Setup
 
-- Install the latest ruby (perhaps `brew install chruby ruby-install; ruby-install ruby`?)
+- Install the latest Ruby. If you don't have a preferred ruby manager:
+  - Run `brew install chruby`
+  - Follow the `chruby` setup instructions printed by homebrew
+  - Run `brew install ruby-install`
+  - Run `ruby-install ruby $(cat .ruby-version)`
+  - Run `chruby $(cat .ruby-version)`
 - Run `bin/setup`
 
 **Optional**
 
 - Run `brew install puma/puma/puma-dev` to install [puma-dev](https://github.com/puma/puma-dev)
 - Run `sudo puma-dev -setup; puma-dev -install; puma-dev link` to set it up
-- Develop the site at [nexttrace.test](https://nexttrace.test)
+- Develop the site at [nexttrace.test](https://nexttrace.test) with valid SSL
 
 ### Usage
 

@@ -1,6 +1,5 @@
 class ResponsesController < RespondentController
   before_action :require_respondent!
-  before_action :set_response, only: [:show]
   # before_action :set_response, only: [:show, :edit, :update, :destroy]
 
   # # GET /responses
@@ -11,6 +10,12 @@ class ResponsesController < RespondentController
   # GET /responses/1
   def show
     return redirect_to(response_step_path(1)) unless params.has_key?(:step)
+
+    @response = current_respondent.response
+    @organization = current_respondent.organization
+
+    current_step_path = response_step_path(@response.current_step)
+    return redirect_to(current_step_path) unless 
 
     render params[:step] if (1..5).include?(params[:step].to_i)
   end
