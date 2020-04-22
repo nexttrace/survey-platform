@@ -21,5 +21,6 @@
 #
 class Response < ApplicationRecord
   belongs_to :organization
-  belongs_to :respondent
+  belongs_to :respondent, dependent: :destroy
+  has_one :survey_invitation
 end

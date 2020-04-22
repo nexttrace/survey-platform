@@ -9,7 +9,7 @@ class SurveyInvitationsController < ApplicationController
 
   # GET /survey_invitations/1
   def show
-    return redirect_to(survey_invitations_path)
+    redirect_to edit_survey_invitation_path(@survey_invitation)
   end
 
   # GET /survey_invitations/new
@@ -29,7 +29,7 @@ class SurveyInvitationsController < ApplicationController
       if @survey_invitation.save
         invite_sms(@survey_invitation)
         invite_email(@survey_invitation)
-        redirect_to @survey_invitation, notice: "Survey invitation was successfully created."
+        redirect_to survey_invitations_path, notice: "Survey invitation was successfully created."
       else
         render :new
         raise ActiveRecord::Rollback, "Survey failed to save"
