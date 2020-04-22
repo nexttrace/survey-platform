@@ -31,7 +31,7 @@ class Respondent < ApplicationRecord
   passwordless_with :email
 
   def self.fetch_resource_for_passwordless(email)
-    find_by_email(email) || find_by_phone(phone)
+    find_by_email(email) || find_by_phone(email)
   end
 
 end

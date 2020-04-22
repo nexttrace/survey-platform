@@ -10,7 +10,7 @@
         <div class="field">
           <%= label_tag email_field_name, "Email address or phone number", class: "label" %>
           <div class="control">
-            <%= email_field_tag email_field_name, params.fetch(email_field_name, nil), autofocus: true, autocomplete: "email", class: "input" %>
+            <%= text_field_tag email_field_name, params.fetch(email_field_name, nil), autofocus: true, autocomplete: "email", class: "input" %>
           </div>
         </div>
 
