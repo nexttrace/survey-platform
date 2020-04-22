@@ -12,6 +12,8 @@ $footer-background-color: false;
 $footer-padding: 3rem 0;
 
 @import "~bulma/bulma";
+@import "~bulma-o-steps/bulma-steps";
+@import "flatpickr";
 
 .navbar-brand {
 	margin-left: 0.5rem;

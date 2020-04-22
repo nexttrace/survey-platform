@@ -1,0 +1,42 @@
+<h3 class="subtitle">Contacts within your home or residence</h3>
+
+<p>
+  In this portion of the survey we will ask you about the people you live with, and anyone who may have come to your home and spent time there while you were infectious <date range here>.
+</p>
+
+<p>
+  Question 1: Where do you reside?
+  Multiple choice: 
+  House/apartment/condo, 
+  Institution or group setting (such as college dormitories, long term care facilities (referred to as nursing homes), groups homes, correctional facilities, or a military base)
+</p>
+
+<p>
+  IF House/apartment/condo: Excluding yourself, how many people live in your household? This includes spouses, partners, family members, or roommates.
+  Please indicate the number of people.
+  For each person, please give their name, email address, address, and telephone number
+</p>
+
+<p>
+  IF Institution or group setting: 
+  Please indicate the number of institutional settings you spent time in.
+  Please provide the name, address, and phone number of the institution.
+  Please indicate which days you were in each institution or group setting.
+</p>
+
+
+<p>
+  Question 2: From  <autofill date range for infectious period>, did anyone come to your home? Possible examples could be relatives, friends, neighbors, contractors, superintendents, home health aides, or first responders. Please do not  include delivery personnel unless you came within 6 feet of them.
+</p>
+
+<p>
+  For each person, please give their name, telephone number and the dates you had contact with them, and any additional contact information that may help us get in contact with them.
+</p>
+
+<p>
+  For each reported contact, it would be helpful in the actual survey design to somehow be able to check whether it was one time contact, and then you would be prompted to give the date of last contact, or whether it’s an ongoing exposure.
+</p>
+
+<p>
+  <%= link_to "Next step", response_step_path(params[:step].to_i + 1), class: "button is-link" %>
+</p>

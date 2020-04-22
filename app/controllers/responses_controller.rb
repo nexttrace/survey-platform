@@ -1,6 +1,6 @@
 class ResponsesController < RespondentController
   before_action :require_respondent!
-  # before_action :set_response, only: [:show, :edit, :update, :destroy]
+  before_action :set_response, only: [:show, :thank_you]
 
   # # GET /responses
   # def index
@@ -9,15 +9,12 @@ class ResponsesController < RespondentController
 
   # GET /responses/1
   def show
-    return redirect_to(response_step_path(1)) unless params.has_key?(:step)
+    return redirect_to(response_step_path(1)) unless params.has_key?(:step) && (1..6).include?(params[:step].to_i)
 
-    @response = current_respondent.response
-    @organization = current_respondent.organization
+    render params[:step]
+  end
 
-    current_step_path = response_step_path(@response.current_step)
-    return redirect_to(current_step_path) unless 
-
-    render params[:step] if (1..5).include?(params[:step].to_i)
+  def thank_you
   end
 
   # # GET /responses/new
@@ -59,6 +56,7 @@ class ResponsesController < RespondentController
     # Use callbacks to share common setup or constraints between actions.
     def set_response
       @response = current_respondent.response
+      @organization = current_respondent.organization
     end
 
     # Only allow a trusted parameter "white list" through.

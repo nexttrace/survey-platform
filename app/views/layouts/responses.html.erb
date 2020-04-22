@@ -2,7 +2,11 @@
   <div class="columns">
     <div class="column">
       <div class="box">
-        <%= yield %>
+        <%= step(params[:step].to_i, of: 5) if params.key?(:step) %>
+
+        <div class="content">
+          <%= yield %>
+        </div>
       </div>
     </div>
     <div class="column"></div>

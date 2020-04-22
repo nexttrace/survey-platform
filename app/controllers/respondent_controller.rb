@@ -12,7 +12,7 @@ private
 
   def require_respondent!
     return if current_respondent
-    redirect_to respondents.sign_in, flash: { error: "You need to be invited to take the survey" }
+    redirect_to respondents.sign_in_path, flash: { error: "You need to be invited to take the survey" }
   end
 
 end

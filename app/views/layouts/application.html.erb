@@ -54,9 +54,11 @@
       <%= tag.div flash.notice, class: "notification is-success" if flash.key?(:notice) %>
       <%= tag.div flash.alert, class: "notification is-danger" if flash.key?(:alert) %>
 
-      <div class="content">
-        <%= content_for?(:content) ? yield(:content) : yield %>
-      </div>
+      <% if content_for?(:content) %>
+        <%= yield(:content) %>
+      <% else %>
+        <div class="content"><%= yield %></div>
+      <% end %>
     </section>
 
     <footer class="footer">
