@@ -104,7 +104,7 @@ Rails.application.configure do
     :address        => ENV.fetch('MAILGUN_SMTP_SERVER'),
     :user_name      => ENV.fetch('MAILGUN_SMTP_LOGIN'),
     :password       => ENV.fetch('MAILGUN_SMTP_PASSWORD'),
-    :domain         => ENV.fetch("DEFAULT_URL_HOST"),
+    :domain         => "nexttrace.org",
     :authentication => :plain,
   }
   ActionMailer::Base.delivery_method = :smtp
