@@ -98,4 +98,14 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  ActionMailer::Base.smtp_settings = {
+    :port           => ENV.fetch('MAILGUN_SMTP_PORT'),
+    :address        => ENV.fetch('MAILGUN_SMTP_SERVER'),
+    :user_name      => ENV.fetch('MAILGUN_SMTP_LOGIN'),
+    :password       => ENV.fetch('MAILGUN_SMTP_PASSWORD'),
+    :domain         => ENV.fetch("DEFAULT_URL_HOST"),
+    :authentication => :plain,
+  }
+  ActionMailer::Base.delivery_method = :smtp
 end
