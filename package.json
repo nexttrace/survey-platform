@@ -10,6 +10,8 @@
     "bulma-o-steps": "^1.0.9",
     "flatpickr": "^4.6.3",
     "jquery": "^3.5.0",
+    "stimulus": "^1.1.1",
+    "stimulus-flatpickr": "^1.2.4",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

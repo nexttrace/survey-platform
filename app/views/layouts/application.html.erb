@@ -5,13 +5,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application.js', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application.css', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= content_for :head %>
   </head>
 
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar" role="navigation" aria-label="main navigation" data-controller="navbar">
       <div class="container">
         <div class="navbar-brand">
           <%= link_to "/", class: "navbar-item" do %>
@@ -19,14 +19,15 @@
             NextTrace
           <% end %>
 
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-burger">
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" 
+              data-target="navbar.menu" data-action="navbar#toggle">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
 
-        <div id="navbar-menu" class="navbar-menu">
+        <div class="navbar-menu" data-target="navbar.menu">
           <div class="navbar-end">
             <%= link_to "Take Survey", respondents.sign_in_path, class: "navbar-item" %>
 

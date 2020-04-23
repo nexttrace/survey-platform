@@ -1,7 +1,7 @@
 # Note: You must restart bin/webpack-dev-server for changes to take effect
 
 default: &default
-  source_path: app/javascript
+  source_path: app
   source_entry_path: packs
   public_root_path: public
   public_output_path: packs
@@ -51,6 +51,7 @@ default: &default
 development:
   <<: *default
   compile: true
+  extract_css: true
 
   # Verifies that correct packages and versions are installed by inspecting package.json, yarn.lock, and node_modules
   check_yarn_integrity: true
@@ -63,7 +64,7 @@ development:
     public: localhost:3035
     hmr: false
     # Inline should be set to true if using HMR
-    inline: true
+    inline: false
     overlay: true
     compress: true
     disable_host_check: true
