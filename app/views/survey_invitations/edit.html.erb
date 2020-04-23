@@ -2,6 +2,13 @@
 
 <div class="columns">
   <div class="column">
+    <% if @survey_invitation.used_at %>
+      <h4>Survey invitation link has been used</h4>
+      <p>To resume the survey, send a link to the <%= link_to "survey login page", respondents.sign_in_path %>.
+    <% else %>
+      <h3>Survey invitation link</h3>
+      <pre><code><%= code_url(@survey_invitation.token) %></code></pre>
+    <% end %>
 
     <%= form_with(model: @survey_invitation, local: true) do |form| %>
       <%= render 'form', survey_invitation: @survey_invitation, form: form %>
@@ -16,8 +23,6 @@
       </div>
     <% end %>
 
-    <h3>Survey invitation link</h3>
-    <%= link_to code_url(@survey_invitation.token), code_url(@survey_invitation.token) %>
   </div>
   <div class="column"></div>
 </div>
