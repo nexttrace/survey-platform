@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :codes, only: [:show]
 
   get "response/thank_you", to: "responses#thank_you"
+  resource :response, only: [:show, :update]
   get "response/:step", to: "responses#show", as: :response_step
-  resource :response, only: [:show]
 
   # Public health agencies
   devise_for :users, at: "/agency", controllers: {

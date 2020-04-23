@@ -1,22 +1,28 @@
 <h3 class="subtitle">Determining when you were infectious</h3>
 
-<p>
-  To find people who may have been exposed to the virus while you were infectious, we need to determine the period of time that you were infectious. For most people, they are most infectious 2 days before they start to feel symptoms. For the purposes of this survey, we will be asking you about contact you’ve had with other people during a period of time when you could have been infectious. This period is typically 4 days before you started to feel symptoms until 7 days after you started feeling symptoms. If it has not been 7 days since you started to feel symptoms, we will use the date that you take this survey as the last date of your infectious period. 
-</p>
+<%= form_for(@response) do |f| %>
+  <p>
+    To find people who may have been exposed to the virus while you were infectious, we need to determine the period of time that you were infectious. For most people, they are most infectious 2 days before they start to feel symptoms. For the purposes of this survey, we will be asking you about contact you’ve had with other people during a period of time when you could have been infectious. This period is typically 4 days before you started to feel symptoms until 7 days after you started feeling symptoms. If it has not been 7 days since you started to feel symptoms, we will use the date that you take this survey as the last date of your infectious period. 
+  </p>
 
-<p>
-  Please choose the date you first had symptoms of COVID-19.
-  <input type="date" class="flatpickr-inline">
-</p>
+  <p>
+    Please choose the date you first had symptoms of COVID-19.
+    <%= fields_for(@response.data) do |d| %>
+      <div class="control">
+	<%= d.text_field :symptom_onset_date, type: "date", class: "input flatpickr-inline" %>
+      </div>
+    <% end %>
+  </p>
 
-<p>
-  It is possible that you were infectious starting on April 15, 2020.
-</p>
+  <p>
+    It is possible that you were infectious starting on April 15, 2020.
+  </p>
 
-<p>
-  For the following questions, we’ll be asking you about the locations you’ve visited and the people you’ve come in contact with that could have been exposed to the virus. In this survey, close contacts are all members of the same household, intimate partners, or anyone with whom you were in an enclosed space, and within 6 feet of each other for 30 minutes or more.
-</p>
+  <p>
+    For the following questions, we’ll be asking you about the locations you’ve visited and the people you’ve come in contact with that could have been exposed to the virus. In this survey, close contacts are all members of the same household, intimate partners, or anyone with whom you were in an enclosed space, and within 6 feet of each other for 30 minutes or more.
+  </p>
 
-<p>
-  <%= link_to "Next step", response_step_path(params[:step].to_i + 1), class: "button is-link" %>
-</p>
+  <p>
+    <%= f.submit "Next step", class: "button is-link" %>
+  </p>
+<% end %>
