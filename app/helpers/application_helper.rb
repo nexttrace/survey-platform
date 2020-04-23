@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def step(num, of:)
-    tag.ul(class: "steps") do
+    tag.ul(class: "steps is-horizontal") do
       [
         (num-1).times.map do
           tag.li(class: "steps-segment") do
