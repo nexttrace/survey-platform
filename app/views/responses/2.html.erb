@@ -6,10 +6,12 @@
   </p>
 
   <p>
-    Please choose the date you first had symptoms of COVID-19.
+    <b>Please choose the date you first had symptoms of COVID-19.</b>
+
     <%= fields_for(@response.data) do |d| %>
       <div class="control">
-	<%= d.text_field :symptom_onset_date, type: "date", class: "input flatpickr-inline" %>
+	<%= d.text_field :symptom_onset_date, type: "date", class: "input", data: {
+	  controller: "flatpickr", flatpickr_min_date: 3.weeks.ago, flatpickr_max_date: Date.today} %>
       </div>
     <% end %>
   </p>
