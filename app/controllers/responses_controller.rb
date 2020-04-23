@@ -14,9 +14,6 @@ class ResponsesController < RespondentController
     render params[:step]
   end
 
-  def thank_you
-  end
-
   # # GET /responses/new
   # def new
   #   @response = Response.new

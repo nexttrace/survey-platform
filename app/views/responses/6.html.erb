@@ -10,7 +10,6 @@
   Please provide contact’s telephone numbe
 </p>
 
-
 <p>
-  <%= link_to "Complete survey", response_thank_you_path, class: "button is-primary" %>
+  <%= link_to "Complete survey", response_step_path(params[:step].to_i + 1), class: "button is-link" %>
 </p>

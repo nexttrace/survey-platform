@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   passwordless_for :respondents, at: "/survey"
   resources :codes, only: [:show]
 
-  get "response/thank_you", to: "responses#thank_you"
   resource :response, only: [:show, :update]
   get "response/:step", to: "responses#show", as: :response_step
 
