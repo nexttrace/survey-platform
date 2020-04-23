@@ -10,7 +10,7 @@
 
     <%= fields_for(@response.data) do |d| %>
       <div class="control">
-	<%= d.text_field :symptom_onset_date, type: "date", class: "input", data: {
+	<%= d.text_field :symptom_onset_date, type: "date", class: "input flatpickr", data: {
 	  controller: "flatpickr", flatpickr_min_date: 3.weeks.ago, flatpickr_max_date: Date.today} %>
       </div>
     <% end %>
