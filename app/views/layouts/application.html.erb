@@ -51,20 +51,20 @@
       </div>
     </nav>
 
-    <div class="container">
-      <%= tag.div flash.notice, class: "notification is-success" if flash.key?(:notice) %>
-      <%= tag.div flash.alert, class: "notification is-danger" if flash.key?(:alert) %>
+    <section class="section">
+      <div class="container">
+        <%= tag.div flash.notice, class: "notification is-success" if flash.key?(:notice) %>
+        <%= tag.div flash.alert, class: "notification is-danger" if flash.key?(:alert) %>
 
-      <% if content_for?(:content) %>
-        <%= yield(:content) %>
-      <% else %>
-        <div class="content"><%= yield %></div>
-      <% end %>
+        <%= content_for?(:content) ? yield(:content) : tag.div(yield, class: "content") %>
+      </div>
     </section>
 
     <footer class="footer">
-      <div class="content">
-        <p>© NextTrace 2020 - Present</p>
+      <div class="container">
+        <div class="content">
+          <p>© NextTrace 2020 - Present</p>
+        </div>
       </div>
     </footer>
   </body>

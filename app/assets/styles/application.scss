@@ -3,8 +3,11 @@
 $text: #000;
 $text-strong: #000;
 $family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+$gap: 32px;
+$desktop: 768px + (2 * $gap);
+$widescreen-enabled: false;
+$fullhd-enabled: false;
 $navbar-item-img-max-height: 40px;
-$navbar-breakpoint: 839px;
 $navbar-height: 5.5rem;
 $footer-background-color: false;
 $footer-padding: 3rem 0;
@@ -19,7 +22,7 @@ $footer-padding: 3rem 0;
 }
 
 .navbar-menu {
-	margin-right: 0.5rem;
+	padding-right: 0.5rem;
 }
 
 .navbar-menu.is-active {

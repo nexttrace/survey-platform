@@ -1,15 +1,12 @@
 <% content_for :content do %>
   <div class="columns">
     <div class="column">
-      <div class="box">
         <%= step(params[:step].to_i, of: 6) if params.key?(:step) %>
 
         <div class="content">
           <%= yield %>
         </div>
-      </div>
     </div>
-    <div class="column"></div>
   </div>
 <% end %>
 
