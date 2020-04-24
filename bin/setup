@@ -13,6 +13,9 @@ FileUtils.chdir APP_ROOT do
 
   if system('which brew')
     system("which psql") || system!("brew install postgresql")
+    system('brew services | grep "postgresql started"') || system!("brew services start postgresql")
+    system("which yarn") || system!("brew install yarn")
+
   end
 
   system! 'gem install bundler --conservative'
