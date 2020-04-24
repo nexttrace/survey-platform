@@ -9,7 +9,7 @@ class ResponsesController < RespondentController
 
   # GET /responses/1
   def show
-    return redirect_to(response_step_path(1)) unless params.has_key?(:step) && (1..6).include?(params[:step].to_i)
+    return redirect_to(response_step_path(1)) unless params.has_key?(:step) && (1..7).include?(params[:step].to_i)
 
     render params[:step]
   end
