@@ -39,6 +39,7 @@ COPY . /app
 
 # Compile assets with Webpacker or Sprockets
 RUN RAILS_ENV=production \
+    SECRET_KEY_BASE=watermelonwatermelonwatermelonwatermelonwatermelon \
     ASSET_COMPILATION=true \
     bundle exec rails assets:precompile
 
