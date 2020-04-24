@@ -1,42 +1,122 @@
+<div data-controller="survey">
+
 <h3 class="subtitle">Contacts within your home or residence</h3>
 
 <p>
   In this portion of the survey we will ask you about the people you live with, and anyone who may have come to your home and spent time there while you were infectious <date range here>.
 </p>
 
-<p>
-  Question 1: Where do you reside?
-  Multiple choice: 
-  House/apartment/condo, 
-  Institution or group setting (such as college dormitories, long term care facilities (referred to as nursing homes), groups homes, correctional facilities, or a military base)
-</p>
+<div class="field">
+    <%= label_tag :residence, "Where do you reside?", class: "label" %>
+    <div class="control">
+      <%= radio_button_tag :residence, "household", nil, "data-action": "change->survey#householdSelected" %>
+      <%= label_tag :residence_household, "House/apartment/condo", class: "radio" %> <br>
+      <%= radio_button_tag :residence, "group", nil, "data-action": "change->survey#groupSelected"  %>
+      <%= label_tag :residence_group, "Institution or group setting", class: "radio" %> 
+      <span class="subtext">(e.g. college dormitories, long term care facilities (nursing homes),
+      group homes, correctional facilities, or a military base)</span>
+    </div>
+</div>
+
+<div id="followup_household" class="is-hidden">
+  <div class="field">
+    <%= label_tag :address, "What is your address?", class: "label" %>
+    <div class="control">
+      <%= text_area_tag :address, nil, rows: 3, class: "textarea is-small" %>
+    </div>
+  </div>
+
+
+  <label class="label">Please list the people in your household (excluding yourself)</label>
+  <div class="subtext">This includes spouses, partners, family members, or roommates.</div>
+
+  <table class="table" id="household_members" data-target="survey.householdTable">
+  <thead>
+    <tr>
+      <th class="is-size-7">Name</th>
+      <th class="is-size-7">Email</th>
+      <th class="is-size-7">Telephone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+  </tbody>
+  </table>
+
+  <button data-action="click->survey#addMoreHousehold" class="button is-primary is-small">Add another</button>
+
+</div>
+
+<div id="followup_group" class="is-hidden">
+
+  <label class="label">Please list the institutional settings you spent time in</label>
 
 <p>
-  IF House/apartment/condo: Excluding yourself, how many people live in your household? This includes spouses, partners, family members, or roommates.
-  Please indicate the number of people.
-  For each person, please give their name, email address, address, and telephone number
-</p>
-
-<p>
-  IF Institution or group setting: 
-  Please indicate the number of institutional settings you spent time in.
   Please provide the name, address, and phone number of the institution.
   Please indicate which days you were in each institution or group setting.
 </p>
 
+<table class="table" id="groups" data-target="survey.groupTable">
+  <thead>
+    <tr>
+      <th class="is-size-7">Name</th>
+      <th class="is-size-7">Address</th>
+      <th class="is-size-7">Telephone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+  </tbody>
+  </table>
 
-<p>
-  Question 2: From  <autofill date range for infectious period>, did anyone come to your home? Possible examples could be relatives, friends, neighbors, contractors, superintendents, home health aides, or first responders. Please do not  include delivery personnel unless you came within 6 feet of them.
+  <button data-action="click->survey#addMoreGroup" class="button is-primary is-small">Add another</button>
+
+<p class="question">
+  Question 2: From  <autofill date range for infectious period>, did anyone come to your home?
+  <span class="subtext">Possible examples could be relatives, friends, neighbors, contractors, superintendents, home
+  health aides, or first responders. Please do not include delivery personnel unless you came
+  within 6 feet of them.</span>
 </p>
 
 <p>
-  For each person, please give their name, telephone number and the dates you had contact with them, and any additional contact information that may help us get in contact with them.
+  For each person, please give their name, telephone number and the dates you had contact with 
+  them, and any additional contact information that may help us get in contact with them.
 </p>
 
 <p>
-  For each reported contact, it would be helpful in the actual survey design to somehow be able to check whether it was one time contact, and then you would be prompted to give the date of last contact, or whether it’s an ongoing exposure.
+  For each reported contact, it would be helpful in the actual survey design to somehow be able
+  to check whether it was one time contact, and then you would be prompted to give the date of
+  last contact, or whether it’s an ongoing exposure.
 </p>
 
+</div>
+
+<br><br><br> <!-- bleh -->
 <p>
   <%= link_to "Next step", response_step_path(params[:step].to_i + 1), class: "button is-link" %>
 </p>
+
+</div>
