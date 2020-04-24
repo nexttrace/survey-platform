@@ -4,7 +4,11 @@ options = {
 
 case Rails.env
 when "production"
-  options[:host] = ENV.fetch("DEFAULT_URL_HOST")
+  if ENV.has_key?("ASSET_COMPILATION")
+    options[:host] = ENV.fetch("DEFAULT_URL_HOST", "nexttrace.test")
+  else
+    options[:host] = ENV.fetch("DEFAULT_URL_HOST")
+  end
 when "test"
   options[:host] = "nexttrace.test"
 when "development"
