@@ -1,6 +1,0 @@
-#!/bin/sh
-set -euo pipefail
-
-export RAILS_ENV=production
-bin/rake db:migrate
-bin/puma -C config/puma.rb

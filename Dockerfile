@@ -69,4 +69,4 @@ USER app
 # https://github.com/moby/moby/issues/30018
 RUN mkdir -p /app/log /app/tmp/cache /app/tmp/pids /app/tmp/sockets /app/tmp/storage
 
-CMD ["bin/cloud-run-server"]
+CMD ["bin/puma", "-C", "config/puma.rb"]
