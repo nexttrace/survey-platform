@@ -25,7 +25,7 @@ RUN bundle config --local frozen 1 && \
 #### ONBUILD: Add triggers to the image, executed later while building a child image
 
 # Install Ruby gems (for production only)
-ONBUILD COPY Gemfile* /app/
+ONBUILD COPY Gemfile* .ruby-version /app/
 ONBUILD RUN bundle config --local without 'development test' && \
             bundle install -j4 --retry 3 && \
             # Remove unneeded gems
