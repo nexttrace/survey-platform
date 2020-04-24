@@ -1,41 +1,5 @@
 # Inspired by https://github.com/ledermann/docker-rails-base
-FROM ruby:2.7.1-alpine AS builder
-
-# Add basic packages
-RUN apk add --update --no-cache \
-      build-base \
-      postgresql-dev \
-      git \
-      nodejs \
-      yarn \
-      tzdata \
-      file
-
-WORKDIR /app
-
-# Install Ruby gems (for production only)
-COPY Gemfile* .ruby-version /app/
-RUN bundle config --local without 'development test' && \
-    bundle config --local build.sassc --disable-march-tune-native && \
-    bundle config --local frozen 1 && \
-    bundle install -j4 --retry 3 && \
-    rm -rf /usr/local/bundle/cache/*.gem && \
-    find /usr/local/bundle/gems/ -name "*.c" -delete && \
-    find /usr/local/bundle/gems/ -name "*.o" -delete
-
-# Copy the whole application folder into the image
-COPY . /app
-
-# Compile assets with Webpacker or Sprockets
-RUN RAILS_ENV=production \
-    SECRET_KEY_BASE=watermelonwatermelonwatermelonwatermelonwatermelon \
-    ASSET_COMPILATION=true \
-    bundle exec rails assets:precompile
-
-# Remove folders not needed in resulting image
-RUN rm -rf node_modules tmp/cache vendor/bundle test spec
-
-FROM ruby:2.7.1-alpine
+FROM gcr.io/dynamic-return-274121/nexttrace-builder:latest AS Builder
 
 # Add user
 RUN addgroup -g 1000 -S app && \
