@@ -14,7 +14,7 @@ RUN apk add --update --no-cache \
 WORKDIR /app
 
 # Install Ruby gems (for production only)
-COPY Gemfile* /app/
+COPY Gemfile* .ruby-version /app/
 RUN bundle config --local without 'development test' && \
     bundle config --local build.sassc --disable-march-tune-native && \
     bundle config --local frozen 1 && \
