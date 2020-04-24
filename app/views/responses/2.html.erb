@@ -25,6 +25,6 @@
   </p>
 
   <p>
-    <%= f.submit "Next step", class: "button is-link" %>
+    <%= link_to "Next step", response_step_path(params[:step].to_i + 1), class: "button is-link" %>
   </p>
 <% end %>
