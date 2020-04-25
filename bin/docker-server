@@ -1,4 +1,8 @@
 #!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
 
 echo "3000" > ~/.puma-dev/docker.nexttrace
 docker build . -t nexttrace

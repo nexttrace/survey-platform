@@ -1,4 +1,7 @@
 #!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
 
 export REGION=us-central1
 export SERVICE=nexttrace
