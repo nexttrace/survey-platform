@@ -100,15 +100,10 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   unless ENV["ASSET_COMPILATION"]
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address              => "smtp.sendgrid.net",
-      :port                 => 465,
-      :user_name            => "apikey",
-      :password             => ENV.fetch("SENDGRID_API_KEY"),
-      :domain               => "nexttrace.org",
-      :authentication       => :plain,
-      :enable_starttls_auto => true
+    config.action_mailer.delivery_method = :sendgrid_actionmailer
+    config.action_mailer.sendgrid_actionmailer_settings = {
+      api_key: ENV.fetch('SENDGRID_API_KEY'),
+      raise_delivery_errors: true
     }
   end
 end
