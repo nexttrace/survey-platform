@@ -1,7 +1,11 @@
 steps:
     - id: 'build  '
       name: 'gcr.io/cloud-builders/docker'
-      args: ['build', '-t', 'gcr.io/${PROJECT_ID}/${_SERVICE}', '.']
+      args: [
+        'build', '-t', 'gcr.io/${PROJECT_ID}/${_SERVICE}', '.',
+        '--build-arg=COMMIT_SHA=${_COMMIT_SHA}',
+        '--build-arg=COMMIT_TIME="${_COMMIT_TIME}"',
+      ]
 
     - id: 'push   '
       name: 'gcr.io/cloud-builders/docker'

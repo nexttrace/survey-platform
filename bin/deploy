@@ -5,7 +5,9 @@ set -vx
 
 export REGION=us-central1
 export SERVICE=nexttrace
+export COMMIT_SHA=$(git show -s --format=%H)
+export COMMIT_TIME=$(git show -s --format=%ci)
 
 gcloud builds submit \
   --config .cloudbuild/build-deploy.yaml \
-  --substitutions "_REGION=${REGION},_SERVICE=${SERVICE}"
+  --substitutions "_REGION=${REGION},_SERVICE=${SERVICE},_COMMIT_SHA=${COMMIT_SHA},_COMMIT_TIME=\"${COMMIT_TIME}\""
