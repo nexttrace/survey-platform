@@ -4,3 +4,7 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+# Prevent duplicate `yarn install` on assets:precompile
+Rake::Task["yarn:install"].clear
+namespace(:yarn) { task(:install) {} }
