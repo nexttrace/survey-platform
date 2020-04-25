@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   resources :codes, only: [:show]
 
   resource :response, only: [:show, :update]
-  get "response/:step", to: "responses#show", as: :response_step
+  get "/response/:step", to: "responses#show", as: :response_step
 
   # Public health agencies
   devise_for :users, at: "/agency", controllers: {
     registrations: "users/registrations",
   }
-  get "dashboard", to: "dashboard#index"
+  get "/dashboard", to: "dashboard#index"
   resources :survey_invitations
 
   # Public
