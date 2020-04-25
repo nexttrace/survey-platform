@@ -32,9 +32,18 @@ Rails.application.configure do
   # config.active_storage.service = :local
 
   # Show emails in the browser
-  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
+
+  if ENV.has_key?("SENDGRID_API_KEY")
+    config.action_mailer.delivery_method = :sendgrid_actionmailer
+    config.action_mailer.sendgrid_actionmailer_settings = {
+      api_key: ENV['SENDGRID_API_KEY'],
+      raise_delivery_errors: true
+    }
+  else
+    config.action_mailer.delivery_method = :letter_opener
+  end
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

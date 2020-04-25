@@ -100,8 +100,8 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   unless ENV["ASSET_COMPILATION"]
-    ActionMailer::Base.delivery_method = :smtp
-    ActionMailer::Base.smtp_settings = {
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
       :address              => "smtp.sendgrid.net",
       :port                 => 465,
       :user_name            => "apikey",

@@ -28,3 +28,5 @@ group :development do
   gem "web-console", ">= 3.3.0"
   gem "letter_opener", "~> 1.7"
 end
+
+gem "sendgrid-actionmailer", "~> 3.0"
