@@ -75,14 +75,14 @@ private
       body: sms_message
     )
   rescue
-    flash.error = "SMS invitation could not be sent"
+    flash.alert = "SMS invitation could not be sent"
   end
 
   def invite_email(si)
     return unless si.email
     SurveyInvitationMailer.with(survey_invitation: @survey_invitation).notification_email.deliver_later
   rescue
-    flash.error = "Invitation email could not be sent"
+    flash.alert = "Invitation email could not be sent"
   end
 
 end
