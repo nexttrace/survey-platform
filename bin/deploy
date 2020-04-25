@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export REGION=us-central1
+export SERVICE=nexttrace
+
+gcloud builds submit \
+  --config .cloudbuild/build-deploy.yaml \
+  --substitutions "_REGION=${REGION},_SERVICE=${SERVICE}"
