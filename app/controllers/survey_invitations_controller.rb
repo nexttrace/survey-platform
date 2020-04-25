@@ -80,7 +80,7 @@ private
 
   def invite_email(si)
     return unless si.email
-    SurveyInvitationMailer.with(survey_invitation: @survey_invitation).notification_email.deliver_later
+    SurveyInvitationMailer.with(survey_invitation: @survey_invitation).notification_email.deliver_now
   rescue
     flash.alert = "Invitation email could not be sent"
   end
