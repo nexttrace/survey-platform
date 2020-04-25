@@ -1,5 +1,6 @@
 # Inspired by https://github.com/ledermann/docker-rails-base
 FROM gcr.io/dynamic-return-274121/nexttrace-builder:latest AS builder
+FROM ruby:2.7.1-alpine
 
 # Add user
 RUN addgroup -g 1000 -S app && \
