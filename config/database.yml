@@ -14,6 +14,6 @@ test:
 production:
   <<: *default
   database: <%= ENV.fetch("DATABASE_NAME", "nexttrace") %>
-  username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
+  username: <%= ENV.fetch("DATABASE_USER", "nexttrace") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "nexttrace") %>
   host: <%= ENV["DATABASE_HOST"] %>
