@@ -1,4 +1,7 @@
 /.bundle
+/.dockerignore
+/Dockerfile
+/Dockerfile-base
 /log
 /node_modules
 /public/packs

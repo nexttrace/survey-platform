@@ -17,9 +17,10 @@ COPY package.json yarn.lock /app/
 RUN yarn install --frozen-lockfile
 
 # Install standard gems
-COPY Gemfile* /app/
+COPY Gemfile* .ruby-version /app/
 RUN bundle config --local frozen 1 && \
     bundle config --local build.sassc --disable-march-tune-native && \
+    bundle config --local without 'development test' && \
     bundle install -j4 --retry 3
 
 #### ONBUILD: Add triggers to the image, executed later while building a child image
@@ -35,11 +36,14 @@ ONBUILD RUN bundle config --local without 'development test' && \
             find /usr/local/bundle/gems/ -name "*.c" -delete && \
             find /usr/local/bundle/gems/ -name "*.o" -delete
 
+ONBUILD COPY package.json yarn.lock /app/
+ONBUILD RUN yarn install --frozen-lockfile
+
 # Copy the whole application folder into the image
 ONBUILD COPY . /app
 
 ONBUILD RUN RAILS_ENV=production \
-            SECRET_KEY_BASE=watermelonwatermelonwatermelonwatermelonwatermelon \
+            SECRET_KEY_BASE=melonmelonmelonmelonmelonmelonmelon \
             ASSET_COMPILATION=true \
             bundle exec rails assets:precompile
 

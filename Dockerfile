@@ -1,5 +1,5 @@
 # Inspired by https://github.com/ledermann/docker-rails-base
-FROM gcr.io/dynamic-return-274121/nexttrace-builder:latest AS builder
+FROM gcr.io/dynamic-return-274121/nexttrace-base:latest AS base
 FROM ruby:2.7.1-alpine
 
 # Add user
@@ -25,8 +25,8 @@ ENV COMMIT_SHA ${COMMIT_SHA}
 ENV COMMIT_TIME ${COMMIT_TIME}
 
 # Copy app with gems from former build stage
-COPY --from=builder --chown=app:app /usr/local/bundle/ /usr/local/bundle/
-COPY --from=builder --chown=app:app /app /app
+COPY --from=base --chown=app:app /usr/local/bundle/ /usr/local/bundle/
+COPY --from=base --chown=app:app /app /app
 
 USER app
 
