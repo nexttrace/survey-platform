@@ -24,7 +24,7 @@ ENV COMMIT_SHA ${COMMIT_SHA}
 ENV COMMIT_TIME ${COMMIT_TIME}
 
 # Copy app with gems from former build stage
-COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
+COPY --from=Builder --chown=app:app /usr/local/bundle/ /usr/local/bundle/
 COPY --from=Builder --chown=app:app /app /app
 
 USER app
