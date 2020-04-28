@@ -12,7 +12,7 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.1"
 gem "turbolinks", "~> 5"
 gem "twilio-ruby", "~> 5.33"
-gem "webpacker", "~> 4.0"
+gem "webpacker", "~> 5.1"
 
 group :development, :test do
   gem "annotate", "~> 3.1"
