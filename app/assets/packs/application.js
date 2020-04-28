@@ -14,6 +14,3 @@ import "javascript/controllers"
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-
-// Stylesheets need to be imported into a pack as well, but render into a separate CSS file
-import "styles/application"
