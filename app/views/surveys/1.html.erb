@@ -23,9 +23,9 @@
 
 <p>
   Sincerely,<br>
-  <%= @response.organization.name %>
+  <%= @survey.organization.name %>
 </p>
 
 <p>
-  <%= link_to "Start contact tracing survey", response_step_path(params[:step].to_i + 1), class: "button is-link" %>
+  <%= link_to "Start contact tracing survey", survey_step_path(params[:step].to_i + 1), class: "button is-link" %>
 </p>

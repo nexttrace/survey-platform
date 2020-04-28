@@ -15,13 +15,13 @@ class CodesController < RespondentController
       )
       sign_in @respondent
 
-      @response = Response.create!(
+      @survey = Survey.create!(
         organization: @survey_invitation.organization,
         respondent: @respondent
       )
     end
 
-    redirect_to response_path
+    redirect_to survey_path
   end
 
 end

@@ -27,7 +27,7 @@ class Respondent < ApplicationRecord
   belongs_to :survey_invitation
   belongs_to :organization
 
-  has_one :response, dependent: :destroy
+  has_one :survey, dependent: :destroy
 
   passwordless_with :email
 
