@@ -22,9 +22,12 @@ else
   raise "unknown environment"
 end
 
-Rails.application.config.after_initialize do |app|
-  app.config.hosts << options[:host] unless app.config.hosts.include?(options[:host])
+# Hosts have to be added now, before `after_initialize`
+Rails.configuration.tap do |config|
+  config.hosts << options[:host] unless config.hosts.include?(options[:host])
+end
 
+Rails.application.config.after_initialize do |app|
   app.config.action_mailer.default_url_options ||= {}
   app.config.action_mailer.default_url_options.merge!(options)
 
