@@ -22,8 +22,8 @@ else
   raise "unknown environment"
 end
 
-Rails.application.tap do |app|
-  app.routes.default_url_options.merge!(options)
+Rails.application.config.after_initialize do |app|
+  app.config.hosts << options[:host] unless app.config.hosts.include?(options[:host])
 
   app.config.action_mailer.default_url_options ||= {}
   app.config.action_mailer.default_url_options.merge!(options)
@@ -31,5 +31,9 @@ Rails.application.tap do |app|
   app.config.action_controller.default_url_options ||= {}
   app.config.action_controller.default_url_options.merge!(options)
 
-  app.config.hosts << options[:host] unless app.config.hosts.include?(options[:host])
+  app.routes.default_url_options.merge!(options)
+
+  Passwordless::Engine.configure do |engine|
+    engine.routes.default_url_options.merge!(Rails.application.routes.default_url_options)
+  end
 end
