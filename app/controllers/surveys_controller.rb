@@ -1,6 +1,6 @@
 class SurveysController < RespondentController
   before_action :require_respondent!
-  before_action :set_survey, only: [:show, :thank_you, :update]
+  before_action :set_survey, only: [:show, :update]
 
   # # GET /surveys
   # def index
