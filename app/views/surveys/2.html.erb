@@ -1,16 +1,16 @@
 <h3 class="subtitle">Determining when you were infectious</h3>
 
-<%= form_for(@survey) do |f| %>
+<%= form_for @survey, url: survey_path do |f| %>
   <p>
     To find people who may have been exposed to the virus while you were infectious, we need to determine the period of time that you were infectious. For most people, they are most infectious 2 days before they start to feel symptoms. For the purposes of this survey, we will be asking you about contact you’ve had with other people during a period of time when you could have been infectious. This period is typically 4 days before you started to feel symptoms until 7 days after you started feeling symptoms. If it has not been 7 days since you started to feel symptoms, we will use the date that you take this survey as the last date of your infectious period. 
   </p>
 
   <div class="field">
-    <%= fields_for(@survey.data) do |d| %>
+    <%= f.fields_for :data, @survey.data do |data| %>
     <%= label_tag :symptom_onset_date, "Please choose the date you first had symptoms of COVID-19:", class: "label" %>
 
     <div class="control">
-    	<%= d.text_field :symptom_onset_date, type: "date", class: "input flatpickr", data: {
+    	<%= data.text_field :symptom_onset_date, type: "date", class: "input flatpickr", data: {
 	  controller: "flatpickr", flatpickr_min_date: 3.weeks.ago, flatpickr_max_date: Date.today} %>
     </div>
     <% end %>
@@ -25,6 +25,7 @@
   </p>
 
   <p>
-  <%= link_to "Next step", survey_step_path(params[:step].to_i + 1), class: "button is-link" %>
+  <input type="hidden" name="step" value="<%= params[:step] %>" />
+  <%= f.submit "Next step", class: "button is-link" %>
   </p>
 <% end %>
