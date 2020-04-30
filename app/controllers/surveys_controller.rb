@@ -36,12 +36,14 @@ class SurveysController < RespondentController
 
   # PATCH/PUT /surveys/1
   def update
-    # no step, just boot them to the start of the form
-    return redirect_to(survey_step_path(1)) unless params.has_key?(:step) && (1..7).include?(params[:step].to_i)
-
     # for now, assume we just go to step n+1; need to handle last step case
     if @survey.update(survey_params)
-      return redirect_to(survey_step_path(params[:step].to_i + 1))
+      if params.has_key?(:next_step)
+        return redirect_to(survey_step_path(params[:next_step].to_i))
+      else
+        # go to the start of the form? ¯\_(ツ)_/¯
+        return redirect_to(survey_step_path(1))
+      end
     else
       redirect_to @survey, notice: 'There was a problem saving.' # TODO: this is not right
     end

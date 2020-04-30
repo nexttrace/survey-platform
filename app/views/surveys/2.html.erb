@@ -25,7 +25,7 @@
   </p>
 
   <p>
-  <input type="hidden" name="step" value="<%= params[:step] %>" />
+  <input type="hidden" name="next_step" value="<%= params[:step].to_i + 1 %>" />
   <%= f.submit "Next step", class: "button is-link" %>
   </p>
 <% end %>
