@@ -2,7 +2,7 @@
 
 <div class="field is-grouped">
   <div class="control">
-    <%= link_to "Report positive test and initiate survey", new_survey_invitation_path, class: "button is-link" %>
+    <%= link_to "Report positive test and initiate survey", new_agency_survey_invitation_path, class: "button is-link" %>
   </div>
 </div>
 
@@ -22,8 +22,8 @@
         <td><%= survey_invitation.name %></td>
         <td><%= survey_invitation.email %></td>
         <td><%= survey_invitation.phone %></td>
-        <td><%= link_to 'Edit', edit_survey_invitation_path(survey_invitation) %></td>
-        <td><%= link_to 'Destroy', survey_invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_agency_survey_invitation_path(survey_invitation) %></td>
+        <td><%= link_to 'Destroy', [:agency, survey_invitation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

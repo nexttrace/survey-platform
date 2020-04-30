@@ -3,7 +3,7 @@
 <div class="columns">
   <div class="column">
 
-    <%= form_with(model: @survey_invitation, local: true) do |form| %>
+    <%= form_with(model: [:agency, @survey_invitation], local: true) do |form| %>
       <%= render 'form', survey_invitation: @survey_invitation, form: form %>
 
       <div class="field is-grouped">
@@ -11,7 +11,7 @@
           <%= form.submit "Report and send survey invitation", class: "button is-link" %>
         </div>
         <div class="control">
-          <%= link_to "Cancel", survey_invitations_path, class: "button is-link is-light" %>
+          <%= link_to "Cancel", agency_survey_invitations_path, class: "button is-link is-light" %>
         </div>
       </div>
     <% end %>

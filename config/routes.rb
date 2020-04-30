@@ -7,11 +7,13 @@ Rails.application.routes.draw do
   get "/survey/:step", to: "surveys#show", as: :survey_step
 
   # Public health agencies
-  devise_for :users, at: "/agency", controllers: {
+  devise_for :users, path_prefix: "agency", controllers: {
     registrations: "users/registrations",
   }
-  get "/dashboard", to: "dashboard#index"
-  resources :survey_invitations
+  namespace :agency do
+    resource :dashboard, only: [:show]
+    resources :survey_invitations
+  end
 
   # Public
   root to: "home#index"

@@ -1,4 +1,4 @@
-class SurveyInvitationsController < ApplicationController
+class Agency::SurveyInvitationsController < AgencyController
   before_action :require_organization!
   before_action :set_survey_invitation, only: [:show, :edit, :update, :destroy]
 
@@ -9,7 +9,7 @@ class SurveyInvitationsController < ApplicationController
 
   # GET /survey_invitations/1
   def show
-    redirect_to edit_survey_invitation_path(@survey_invitation)
+    redirect_to edit_agency_survey_invitation_path(@survey_invitation)
   end
 
   # GET /survey_invitations/new
@@ -29,7 +29,7 @@ class SurveyInvitationsController < ApplicationController
       if @survey_invitation.save
         invite_sms(@survey_invitation)
         invite_email(@survey_invitation)
-        redirect_to survey_invitations_path, notice: "Survey invitation was successfully created."
+        redirect_to agency_survey_invitations_path, notice: "Survey invitation was successfully created."
       else
         render :new
         raise ActiveRecord::Rollback, "Survey failed to save"
@@ -40,7 +40,7 @@ class SurveyInvitationsController < ApplicationController
   # PATCH/PUT /survey_invitations/1
   def update
     if @survey_invitation.update(survey_invitation_params)
-      redirect_to @survey_invitation, notice: 'Survey invitation was successfully updated.'
+      redirect_to agency_survey_invitations_path, notice: 'Survey invitation was successfully updated.'
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class SurveyInvitationsController < ApplicationController
   # DELETE /survey_invitations/1
   def destroy
     @survey_invitation.destroy
-    redirect_to survey_invitations_url, notice: 'Survey invitation was successfully destroyed.'
+    redirect_to agency_survey_invitations_path, notice: 'Survey invitation was successfully destroyed.'
   end
 
 private

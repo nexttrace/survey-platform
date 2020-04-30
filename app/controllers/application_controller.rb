@@ -2,13 +2,9 @@ class ApplicationController < ActionController::Base
 
 private
 
-  # agency auth helpers
-  def require_organization!
-    authenticate_user! && @organization = current_user.organization
-  end
-
+  # agency devise auth helpers
   def after_sign_in_path_for(resource)
-    stored_location_for(resource) || dashboard_path
+    stored_location_for(resource) || agency_dashboard_path
   end
 
   # non-user stuff
