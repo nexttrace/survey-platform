@@ -66,6 +66,6 @@ class SurveysController < RespondentController
 
     # Only allow a trusted parameter "white list" through.
     def survey_params
-      params.require(:survey).permit(data: [ :symptom_onset_date ])
+      params.require(:survey).permit(data: {})
     end
 end
