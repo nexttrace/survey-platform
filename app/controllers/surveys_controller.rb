@@ -36,14 +36,10 @@ class SurveysController < RespondentController
 
   # PATCH/PUT /surveys/1
   def update
-    logger.debug "params: #{params.inspect}"
-    logger.debug "survey: #{@survey.attributes.inspect}"
-
     # no step, just boot them to the start of the form
     return redirect_to(survey_step_path(1)) unless params.has_key?(:step) && (1..7).include?(params[:step].to_i)
 
     # for now, assume we just go to step n+1; need to handle last step case
-    logger.debug "survey params: #{survey_params}"
     if @survey.update(survey_params)
       return redirect_to(survey_step_path(params[:step].to_i + 1))
     else
