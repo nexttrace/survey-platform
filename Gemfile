@@ -11,7 +11,7 @@ gem "passwordless", "~> 0.9.0"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.1"
 gem "turbolinks", "~> 5"
-gem "twilio-ruby", "~> 5.33"
+gem "twilio-ruby", "~> 5.34"
 gem "webpacker", "~> 5.1"
 
 group :development, :test do
