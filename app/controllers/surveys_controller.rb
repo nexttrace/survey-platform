@@ -55,15 +55,17 @@ class SurveysController < RespondentController
   #   redirect_to survey_url, notice: 'Survey was successfully destroyed.'
   # end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_survey
-      @survey = current_respondent.survey
-      @organization = current_respondent.organization
-    end
+private
 
-    # Only allow a trusted parameter "white list" through.
-    def survey_params
-      params.require(:survey).permit(data: {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_survey
+    @survey = current_respondent.survey
+    @organization = current_respondent.organization
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def survey_params
+    params.require(:survey).permit(data: {})
+  end
+
 end
