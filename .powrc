@@ -1,5 +1,6 @@
-export RUBYOPT='-W:no-deprecated -W:no-experimental'
 export DEFAULT_URL_HOST=nexttrace.test
+export FORCE_SSL=true
+export RUBYOPT='-W:no-deprecated -W:no-experimental'
 
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 chruby $(cat .ruby-version)
