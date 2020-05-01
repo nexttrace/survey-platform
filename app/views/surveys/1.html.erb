@@ -1,31 +1,21 @@
-<h2 class="title">Contact Tracing Survey</h2>
-<h3 class="subtitle is-5"><%= @organization.name %></h3>
+<%= form_for @survey, url: survey_path do |f| %>
 
-<p>
-  Thank you very much for participating in this survey. Your responses to this survey will help us track the spread of the virus from person to person and prevent others from getting sick. <b>To prevent the spread of the virus, we need to identify people who have been exposed to the virus, even if they might not know it yet, and ask them to quarantine at home.</b> By asking both the people that have tested positive for the virus and those that have been potentially exposed to stay at home and reduce contact with others, the virus can’t be spread to anyone else. 
-</p>
+<h3>When did you start feeling sick?</h3>
+  <div class="field">
+    <%= f.fields_for :data, @survey.data do |data| %>
+    <div class="control">
+    	<%= data.text_field :symptom_onset_date, type: "date", class: "input flatpickr", data: {
+	  controller: "flatpickr", flatpickr_min_date: 3.weeks.ago, flatpickr_max_date: Date.today} %>
+    </div>
+    <% end %>
+  </div>
 
-<p>
-  <b>How do we find people who might be infected even if they haven’t developed symptoms? We need your help.</b> In this survey we are going to ask you questions about other people who you have been in contact with during the period when you were infectious. We will also ask you for the phone numbers of these people (your contacts). Given the kinds of interactions you had with them, we may consider them to be exposed, which means they could also develop COVID-19. In that case, we will contact them and ask them to quarantine for the next 14 days. We will also ask them to monitor their symptoms during that time. When we get in touch with your contacts, we will send them a message stating the following:
-</p>
+  <p>
+  Based off that date, you were likely infectious from DATE to DATE.
+  </p>
 
-<blockquote>
-  Please be advised that you were reported as a person who has had close contact with a person who likely has COVID-19. There is a possibility that they may be infected as well. To stop the spread of COVID-19, we ask that you please quarantine for the next 14 days. Each day of your quarantine we will ask you about your symptoms. We will also help you get tested for COVID-19.
-</blockquote>
-
-<p>
-  We will not give your contacts any information about you, nor will we tell them that we received their information from you. We will try to reach your contacts 3 times. In the event that we are unable to reach your contacts, their information will be deleted after 14 days.
-</p>
-
-<p>
-  We understand that we are asking for a lot from you. <b>We ask this information because right now this is our best way to stop the transmission of COVID-19.</b> This also means that the quality and completeness of your answers impacts how well this works. We kindly ask that you be as accurate as possible with your answers.
-</p>
-
-<p>
-  Sincerely,<br>
-  <%= @survey.organization.name %>
-</p>
-
-<p>
-  <%= link_to "Start contact tracing survey", survey_step_path(params[:step].to_i + 1), class: "button is-link" %>
-</p>
+  <p>
+  <input type="hidden" name="next_step" value="<%= params[:step].to_i + 1 %>" />
+  <%= f.submit "Next: Close contacts", class: "button is-primary is-fullwidth" %>
+  </p>
+<% end %>

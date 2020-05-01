@@ -11,6 +11,12 @@ $navbar-item-img-max-height: 40px;
 $navbar-height: 5.5rem;
 $footer-background-color: false;
 $footer-padding: 3rem 0;
+
+$steps-completed-color: #ad56cd;
+$steps-active-color: #4a3b85;
+$steps-divider-size: 0.1em;
+$steps-default-color: hsl(0, 0%, 96%);
+
 @import "~bulma/bulma";
 
 @import "~bulma-o-steps/bulma-steps";
@@ -53,4 +59,8 @@ $footer-padding: 3rem 0;
 	font-weight: normal;
 	font-style: oblique;
 	font-size: 90%;
+}
+
+.button.is-primary.is-fullwidth {
+	justify-content: center;
 }

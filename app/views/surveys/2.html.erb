@@ -1,31 +1,128 @@
-<h3 class="subtitle">Determining when you were infectious</h3>
-
 <%= form_for @survey, url: survey_path do |f| %>
-  <p>
-    To find people who may have been exposed to the virus while you were infectious, we need to determine the period of time that you were infectious. For most people, they are most infectious 2 days before they start to feel symptoms. For the purposes of this survey, we will be asking you about contact you’ve had with other people during a period of time when you could have been infectious. This period is typically 4 days before you started to feel symptoms until 7 days after you started feeling symptoms. If it has not been 7 days since you started to feel symptoms, we will use the date that you take this survey as the last date of your infectious period. 
-  </p>
 
-  <div class="field">
-    <%= f.fields_for :data, @survey.data do |data| %>
-    <%= label_tag :symptom_onset_date, "Please choose the date you first had symptoms of COVID-19:", class: "label" %>
+<div data-controller="survey">
 
+<h3>Who were you in close contact with?</h3>
+
+<p>
+"Close contacts" are members of the same household, intimate partners, or
+anyone you were in an enclosed space, and within 6 feet of each other for
+more than 5 minutes.
+</p>
+
+<div class="field">
+    <%= label_tag :residence, "1. Where do you reside?", class: "label" %>
     <div class="control">
-    	<%= data.text_field :symptom_onset_date, type: "date", class: "input flatpickr", data: {
-	  controller: "flatpickr", flatpickr_min_date: 3.weeks.ago, flatpickr_max_date: Date.today} %>
+      <%= radio_button_tag :residence, "household", nil, "data-action": "change->survey#householdSelected" %>
+      <%= label_tag :residence_household, "House/apartment/condo", class: "radio" %> <br>
+      <%= radio_button_tag :residence, "group", nil, "data-action": "change->survey#groupSelected"  %>
+      <%= label_tag :residence_group, "Institution or group setting", class: "radio" %> 
+      <span class="subtext">(e.g. college dormitories, long term care facilities (nursing homes),
+      group homes, correctional facilities, or a military base)</span>
     </div>
-    <% end %>
+</div>
+
+<div id="followup_household" class="is-hidden">
+  <div class="field">
+    <%= label_tag :address, "What is your address?", class: "label" %>
+    <div class="control">
+      <%= text_area_tag :address, nil, rows: 3, class: "textarea is-small" %>
+    </div>
   </div>
 
-  <p>
-    It is possible that you were infectious starting on April 15, 2020.
-  </p>
 
-  <p>
-    For the following questions, we’ll be asking you about the locations you’ve visited and the people you’ve come in contact with that could have been exposed to the virus. In this survey, close contacts are all members of the same household, intimate partners, or anyone with whom you were in an enclosed space, and within 6 feet of each other for 30 minutes or more.
-  </p>
+  <label class="label">Please list the people in your household (excluding yourself)</label>
+  <div class="subtext">This includes spouses, partners, family members, or roommates.</div>
 
-  <p>
-  <input type="hidden" name="next_step" value="<%= params[:step].to_i + 1 %>" />
-  <%= f.submit "Next step", class: "button is-link" %>
-  </p>
+  <table class="table" id="household_members" data-target="survey.householdTable">
+  <thead>
+    <tr>
+      <th class="is-size-7">Name</th>
+      <th class="is-size-7">Email</th>
+      <th class="is-size-7">Telephone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+  </tbody>
+  </table>
+
+  <button data-action="click->survey#addMoreHousehold" class="button is-primary is-small">Add another</button>
+
+</div>
+
+<div id="followup_group" class="is-hidden">
+
+  <label class="label">Please list the institutional settings you spent time in</label>
+
+<p>
+  Please provide the name, address, and phone number of the institution.
+  Please indicate which days you were in each institution or group setting.
+</p>
+
+<table class="table" id="groups" data-target="survey.groupTable">
+  <thead>
+    <tr>
+      <th class="is-size-7">Name</th>
+      <th class="is-size-7">Address</th>
+      <th class="is-size-7">Telephone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+    <tr>
+      <td class="is-paddingless"><%= text_field_tag :name, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= email_field_tag :email, nil, class: "input is-small" %></td>
+      <td class="is-paddingless"><%= telephone_field_tag :phone, nil, class: "input is-small" %></td>
+    </tr>
+  </tbody>
+  </table>
+
+  <button data-action="click->survey#addMoreGroup" class="button is-primary is-small">Add another</button>
+
+<p class="question">
+  Question 2: From  <autofill date range for infectious period>, did anyone come to your home?
+  <span class="subtext">Possible examples could be relatives, friends, neighbors, contractors, superintendents, home
+  health aides, or first responders. Please do not include delivery personnel unless you came
+  within 6 feet of them.</span>
+</p>
+
+<p>
+  For each person, please give their name, telephone number and the dates you had contact with 
+  them, and any additional contact information that may help us get in contact with them.
+</p>
+
+<p>
+  For each reported contact, it would be helpful in the actual survey design to somehow be able
+  to check whether it was one time contact, and then you would be prompted to give the date of
+  last contact, or whether it’s an ongoing exposure.
+</p>
+
+</div>
+
+<br><br><br> <!-- bleh -->
+<p>
+  <%= link_to "Next step", survey_step_path(params[:step].to_i + 1), class: "button is-link" %>
+</p>
+
+</div>
+
 <% end %>

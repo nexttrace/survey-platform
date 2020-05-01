@@ -1,8 +1,7 @@
 <% content_for :content do %>
   <div class="columns">
     <div class="column">
-        <%= step(params[:step].to_i, of: 6) if params.key?(:step) %>
-
+        <%= step(params[:step].to_i, of: 6) if params.key?(:step) && params[:step].to_i > 0 %>
         <div class="content">
           <%= yield %>
         </div>

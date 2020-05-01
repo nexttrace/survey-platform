@@ -9,7 +9,7 @@ class SurveysController < RespondentController
 
   # GET /surveys/1
   def show
-    return redirect_to(survey_step_path(1)) unless params.has_key?(:step) && (1..7).include?(params[:step].to_i)
+    return redirect_to(survey_step_path('intro')) unless params.has_key?(:step)
 
     render params[:step]
   end
