@@ -22,5 +22,7 @@
 class Survey < ApplicationRecord
   belongs_to :agency
   belongs_to :contact, dependent: :destroy
-  has_one :survey_invitation
+
+  has_many :reported_contacts, class_name: "Contact", through: :survey_reports
+  has_many :survey_reports, depentent: :destroy
 end

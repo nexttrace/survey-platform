@@ -8,15 +8,19 @@
 #  phone :string
 #
 class Contact < ApplicationRecord
+  passwordless_with :email
+
   validates :email, uniqueness: { case_sensitive: false, allow_nil: true }
   validates :phone, uniqueness: { case_sensitive: false, allow_nil: true }
   nilify_blanks
 
   has_one :survey, dependent: :destroy
-  has_many :agency_reports
-  has_many :survey_reports
 
-  passwordless_with :email
+  has_many :agencies, through: :agency_reports
+  has_many :agency_reports, dependent: :destroy
+  has_many :notices, dependent: :destroy
+  has_many :reported_surveys, through: :survey_reports
+  has_many :survey_reports, dependent: :destroy
 
   def self.fetch_resource_for_passwordless(info)
     find_by_email(info) || find_by_phone(info)
