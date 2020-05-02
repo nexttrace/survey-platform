@@ -1,0 +1,85 @@
+<h3>Hi, <%= @survey.respondent.name %>.</h3>
+
+<p>
+You have tested <span class="has-text-danger">positive</span> for COVID-19. Here's what you do next:
+</p>
+
+<hr>
+
+<article class="media">
+  <div class="media-left">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect width="48" height="48" fill="url(#pattern-house)"/>
+    <defs>
+    <pattern id="pattern-house" patternContentUnits="objectBoundingBox" width="1" height="1">
+    <use xlink:href="#image-house" transform="scale(0.0208333)"/>
+    </pattern>
+    <image id="image-house" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAEGklEQVRoge2YbWxTVRjH/8+97bqupd0LW7Pec7bRbuAyiMrAJRLwZYlm6mZ8gQTYh4mI0UwlYETQCHFxkYw5EYeODIIZqNkH/KD0JYSQLJAgEr+QmGgCQbNJKkbJ2GBh0uOHpXd9p7e9ZZrc38d/n/M8/3/vufeeFjAwMMgbfkVp9itKcz5nSPlq7HO7W0H0HYh8PkV5Pl9z8hLAz1g7SdIxAIUACojo6wBjG/MxS/cAAcY6AXwBwBQlywI44OP8Tb3n6RrAryhdAtgX6Wutb4C1viHyMZEQPX5F6dJzJunRRAAU5PwjIcTmiGZfuhyejwdAEuHS1k5c//7M7FAhPjs7Nta5CwhHtDPnQiK+74oHXHf0l/MVOAWYAopyKNq8Y+XD8PYfhGy3QyqywfvJAIoffUxdI4heaWLsyPnGRnOu83MK4KuttUwxNgyijohW0tIKT+9+SJZCtY7MBajZvRelbc9FL197NRT6Zpgxay4esg5wqrzcTlNTxwE8E9Hmr16H6q4ekMmUUE+yjOqd3ahofyFafnIeEDzh8Tiz9ZFVgKDLVTFlsYwAUF9Sro5N4Nt3gaQ0LYmgbNkO9+sxD6OV07dunRZ/Xc3GivYAJ9zuqrDZPALg/jSm0uLq2AT+9k41LAGLJ995EeHQmFY72gIE3e57/pGk0wAWATPbouq9D+K3RUbMX7M+ZruFQ2OY3LEB4d8uauqTcYBgVVVjWJJGAHBg9sYsezr7U0JJSys8e/rVG178/Scm392I279cyLhHRu+B45yvkoT4FoADAKQiGzy9n2Je04qk9ZWvHU2qX9m3Pqk+8eMPuLT5ZdyemJgRrEUoemsPHnqpLff3QFBRnpKECETMy04naj8/nNJ8NtiXLkfdwBBMpWUzws0buNH9BvyMPXuntWkDBBhbFyY6BsAKAObyCiwc/BK2xffqYDsWa30DFg4ehbnSPSNMTwPAsI/zDenWpQzg5/xVAQwBMAOAZYEXiw4Po9Bbp5vpeCw1nvgZMgkx6Od8S6o1SQP4GNsGIfoRdSiL+XbyiHqVl9wXkQhC9AYY+zBZfUKAAOd9BKjF9mVNqDswBFNJaX4cJ0F2OuHdfwj2ZU2qJoBtAc774msT3/lCqA9ix6pHsGD33phzTSaketpoQbbZUdt/EJd3bMW1k8GIPJpQFy8cGR8/1+5w2EufaHuwprsPUkFBzmayhWQZxc2PY/qPEG7+/FNPy+jo+wk1yRYKgEKhyTBIl58LuSMEXC6bREDCb4akNzEB4j9jHgCIkMw8kMd/Je4WiTdxllxbW62pvvirX3WZ+7+/AkaAucYIMNcYAbTgcHPde97VAJVLGnXvaWwhLVy5cF73nimPEhcvX9fUqCyDmvHfZ4/zWvunwthCc40RwMDAYG75F4l2Brrhk0ugAAAAAElFTkSuQmCC"/>
+    </defs>
+    </svg>
+  </div>
+
+  <div class="media-content">
+    <p>
+      <strong>Self-isolate</strong> for 7 days or until 3 days after your
+      symptoms have completely resolved.
+    </p>
+  </div>
+</article>
+
+<hr>
+
+<article class="media">
+  <div class="media-left">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect width="48" height="48" fill="url(#pattern-doctor)"/>
+    <defs>
+    <pattern id="pattern-doctor" patternContentUnits="objectBoundingBox" width="1" height="1">
+    <use xlink:href="#image-doctor" transform="scale(0.0208333)"/>
+    </pattern>
+    <image id="image-doctor" width="48" height="48" xlink:href="data:image/png;base64,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"/>
+    </defs>
+    </svg>
+  </div>
+
+  <div class="media-content">
+    <p>
+      <strong>Monitor your symptoms.</strong> If they get worse, call your doctor
+      to seek guidance before going to the hospital.
+    </p>
+  </div>
+</article>
+
+<hr>
+
+<article class="media">
+  <div class="media-left">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect width="48" height="48" fill="url(#pattern-people)"/>
+    <defs>
+    <pattern id="pattern-people" patternContentUnits="objectBoundingBox" width="1" height="1">
+    <use xlink:href="#image-people" transform="scale(0.0208333)"/>
+    </pattern>
+    <image id="image-people" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAC8ElEQVRoge2XQUgUURjH/9+b3a0mQQy6hEuQh4QOCktgdtCgFIsKCheCYG9TbEcJ9tjRi3jqsAqysAdhOyWBSi2Uh7wkdRUqiO0qYoRKzryvw+5mrbPz3jgzIjR/2NN77zfff97u998PiBUrVqxY/7NIZxPP96RBiWlIHgEACFQhqEDZ9fUwigjCVxrg+Z40YHwCcKZlaRNw+ujBl9qhqg6JL5RPoMS0CxwAugBjSrvSiPhqA81rddeo8nzEfLUBb3HA84H5agMCVY/VZT/VRMHXMEAFAJsuKxtw5ITyfMR8pYF6K3P6ALwA8KPxqcCR/fTw83e/9R41/9hLmQOX8+cHmTnHwBCA7sapGjFWHEmlj8Vvq61nePluGo6cBmGksb8KpgKNLRwIpsPwtQxkrAudMOxZAOOeDgkV2Alrbebr1p/ipXQPJiH6aPRlLQi/Va6/gYx1zoSxt6SEAwAjC8OuXsqf7QAAOLJ9MEk5FZivY4AMowzQgBK+r8wJPlWqH4YymALxW+RqgEH3fMABAATc19jGYfODJrHbk6INvgOPC1m8eOciwKsAulqWNsB2P91cDLW3h34DNLawDiEOBlMExQO6A42Pvn4YBeGrBxrNvt5Ufu7KoAPkiOQQgboBgIEaM63AoFIx9/6fYPLLb1VCZaDxZrz6ehYArGKmU6SSsxI8Xn8r9Pd/4V4i7oVk6/HcQEXu7Vkzj9a2/PDbSWMiU/d1q5gxRSqpF0yErEglq/nnwx26fC+FMtAYqWQZgK9gkuZuSZfvJZ0bUPZ1BnwHE5rBFDA31AbYY+BgO/hAE5Cv30brP6jmd3IJbE+E1dej5h9rKW9g6t2tQUfIHIH2Bw6gxuAVEkbp6dVXngNH1Py2BiZfX+9MnEzNsro1VpzdX1bhxhvXgSNqvquBZx9um+aOUyX91rhm2tvDT669/amzOUy+axc6veOUfcABILOdNEu6m8Pkt2uj/vs6aw00ofPDH2hixYoVK1asI9RvbJV7sPxf+yIAAAAASUVORK5CYII="/>
+    </defs>
+    </svg>
+  </div>
+
+  <div class="media-content">
+    <p>
+      <strong>Help identify contacts</strong> you interacted with when you were
+      infectious to help stop the spread.
+    </p>
+  </div>
+</article>
+
+<hr>
+
+<p>
+We will reach out to reported contacts to ask them to quarantine for 14 days.
+We will <strong>never</strong> share information about you to your contacts.
+</p>
+
+<p>
+  <%= link_to "Take the 15-minute survey", survey_step_path(1), class: "button is-primary is-fullwidth" %>
+</p>

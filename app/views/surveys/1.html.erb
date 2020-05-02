@@ -1,17 +1,20 @@
+<div data-controller="symptom-onset-date">
+
 <%= form_for @survey, url: survey_path do |f| %>
 
 <h3>When did you start feeling sick?</h3>
   <div class="field">
     <%= f.fields_for :data, @survey.data do |data| %>
     <div class="control">
-    	<%= data.text_field :symptom_onset_date, type: "date", class: "input flatpickr", data: {
-	  controller: "flatpickr", flatpickr_min_date: 3.weeks.ago, flatpickr_max_date: Date.today} %>
+    	<%= data.text_field :symptom_onset_date, type: "date", class: "input flatpickr", data: { target: "symptom-onset-date.instance" } %>
     </div>
     <% end %>
   </div>
 
-  <p>
-  Based off that date, you were likely infectious from DATE to DATE.
+  <p id="infectious-range" class="is-hidden" data-target="symptom-onset-date.text">
+  Based off that date, you were likely infectious from
+  <span data-target="symptom-onset-date.startDate"></span> to 
+  <span data-target="symptom-onset-date.endDate"></span>.
   </p>
 
   <p>
@@ -19,3 +22,5 @@
   <%= f.submit "Next: Close contacts", class: "button is-primary is-fullwidth" %>
   </p>
 <% end %>
+
+</div>
