@@ -1,10 +1,10 @@
 class Agency::SurveyInvitationsController < AgencyController
-  before_action :require_organization!
+  before_action :require_agency!
   before_action :set_survey_invitation, only: [:show, :edit, :update, :destroy]
 
   # GET /survey_invitations
   def index
-    @survey_invitations = @organization.survey_invitations.all
+    @survey_invitations = @agency.survey_invitations.all
   end
 
   # GET /survey_invitations/1
@@ -14,7 +14,7 @@ class Agency::SurveyInvitationsController < AgencyController
 
   # GET /survey_invitations/new
   def new
-    @survey_invitation = @organization.survey_invitations.new
+    @survey_invitation = @agency.survey_invitations.new
   end
 
   # GET /survey_invitations/1/edit
@@ -24,7 +24,7 @@ class Agency::SurveyInvitationsController < AgencyController
   # POST /survey_invitations
   def create
     SurveyInvitation.transaction do
-      @survey_invitation = @organization.survey_invitations.new(survey_invitation_params)
+      @survey_invitation = @agency.survey_invitations.new(survey_invitation_params)
 
       if @survey_invitation.save
         invite_sms(@survey_invitation)
@@ -56,7 +56,7 @@ private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_survey_invitation
-    @survey_invitation = @organization.survey_invitations.find(params[:id])
+    @survey_invitation = @agency.survey_invitations.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

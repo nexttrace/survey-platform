@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_04_28_053933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "organizations", force: :cascade do |t|
+  create_table "agencies", force: :cascade do |t|
     t.string "name"
     t.string "city"
     t.string "county"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2020_04_28_053933) do
     t.string "email"
     t.string "phone"
     t.bigint "survey_invitation_id", null: false
-    t.bigint "organization_id", null: false
-    t.index ["organization_id"], name: "index_respondents_on_organization_id"
+    t.bigint "agency_id", null: false
+    t.index ["agency_id"], name: "index_respondents_on_agency_id"
     t.index ["survey_invitation_id"], name: "index_respondents_on_survey_invitation_id"
   end
 
@@ -52,24 +52,24 @@ ActiveRecord::Schema.define(version: 2020_04_28_053933) do
     t.string "name"
     t.string "email"
     t.string "phone"
-    t.bigint "organization_id", null: false
+    t.bigint "agency_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "token"
     t.datetime "used_at"
+    t.index ["agency_id"], name: "index_survey_invitations_on_agency_id"
     t.index ["email"], name: "index_survey_invitations_on_email", unique: true
-    t.index ["organization_id"], name: "index_survey_invitations_on_organization_id"
     t.index ["phone"], name: "index_survey_invitations_on_phone", unique: true
     t.index ["token"], name: "index_survey_invitations_on_token", unique: true
   end
 
   create_table "surveys", force: :cascade do |t|
     t.jsonb "data"
-    t.bigint "organization_id", null: false
+    t.bigint "agency_id", null: false
     t.bigint "respondent_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["organization_id"], name: "index_surveys_on_organization_id"
+    t.index ["agency_id"], name: "index_surveys_on_agency_id"
     t.index ["respondent_id"], name: "index_surveys_on_respondent_id"
   end
 
@@ -84,17 +84,17 @@ ActiveRecord::Schema.define(version: 2020_04_28_053933) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.bigint "organization_id"
+    t.bigint "agency_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["agency_id"], name: "index_users_on_agency_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "respondents", "organizations"
+  add_foreign_key "respondents", "agencies"
   add_foreign_key "respondents", "survey_invitations"
-  add_foreign_key "survey_invitations", "organizations"
-  add_foreign_key "surveys", "organizations"
+  add_foreign_key "survey_invitations", "agencies"
+  add_foreign_key "surveys", "agencies"
   add_foreign_key "surveys", "respondents"
 end

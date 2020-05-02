@@ -7,7 +7,7 @@ class SurveyInvitationMailer < ApplicationMailer
   #
   def notification_email
     @survey_invitation = params.fetch(:survey_invitation)
-    @organization = @survey_invitation.organization
+    @agency = @survey_invitation.agency
 
     mail to: @survey_invitation.email
   end
@@ -19,7 +19,7 @@ class SurveyInvitationMailer < ApplicationMailer
   #
   def contact_email
     @survey_invitation = params.fetch(:survey_invitation)
-    @organization = @survey_invitation.organization
+    @agency = @survey_invitation.agency
 
     mail to: @survey_invitation.email
   end

@@ -5,7 +5,7 @@ class CreateRespondents < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :phone
       t.belongs_to :survey_invitation, null: false, foreign_key: true
-      t.belongs_to :organization, null: false, foreign_key: true
+      t.belongs_to :agency, null: false, foreign_key: true
     end
   end
 end

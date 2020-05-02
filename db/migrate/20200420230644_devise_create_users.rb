@@ -21,7 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.inet     :current_sign_in_ip
       t.inet     :last_sign_in_ip
 
-      t.belongs_to :organization
+      t.belongs_to :agency
       t.timestamps null: false
     end
 

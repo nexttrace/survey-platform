@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: organizations
+# Table name: agencies
 #
 #  id         :bigint           not null, primary key
 #  city       :string
@@ -12,6 +12,6 @@
 #
 require 'rails_helper'
 
-RSpec.describe Organization, type: :model do
+RSpec.describe Agency, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

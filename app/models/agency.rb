@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: organizations
+# Table name: agencies
 #
 #  id         :bigint           not null, primary key
 #  city       :string
@@ -10,7 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Organization < ApplicationRecord
+class Agency < ApplicationRecord
   validates :city, presence: true
   validates :county, presence: true
   validates :name, presence: true

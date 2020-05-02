@@ -60,7 +60,7 @@ private
   # Use callbacks to share common setup or constraints between actions.
   def set_survey
     @survey = current_respondent.survey
-    @organization = current_respondent.organization
+    @agency = current_respondent.agency
   end
 
   # Only allow a trusted parameter "white list" through.

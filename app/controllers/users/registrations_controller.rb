@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     super do |user|
-      user.build_organization
+      user.build_agency
     end
   end
 
@@ -44,7 +44,7 @@ protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [organization_attributes: [:name, :city, :county, :state]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [agency_attributes: [:name, :city, :county, :state]])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

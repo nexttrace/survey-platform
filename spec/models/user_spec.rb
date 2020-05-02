@@ -15,12 +15,12 @@
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  organization_id        :bigint
+#  agency_id              :bigint
 #
 # Indexes
 #
+#  index_users_on_agency_id             (agency_id)
 #  index_users_on_email                 (email) UNIQUE
-#  index_users_on_organization_id       (organization_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 require 'rails_helper'

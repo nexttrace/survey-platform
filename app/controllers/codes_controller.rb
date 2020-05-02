@@ -11,12 +11,12 @@ class CodesController < RespondentController
         email: @survey_invitation.email,
         phone: @survey_invitation.phone,
         survey_invitation: @survey_invitation,
-        organization: @survey_invitation.organization,
+        agency: @survey_invitation.agency,
       )
       sign_in @respondent
 
       @survey = Survey.create!(
-        organization: @survey_invitation.organization,
+        agency: @survey_invitation.agency,
         respondent: @respondent
       )
     end

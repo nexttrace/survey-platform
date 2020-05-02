@@ -1,10 +1,10 @@
 class AgencyController < ApplicationController
-  before_action :require_organization!
+  before_action :require_agency!
 
 private
 
-  def require_organization!
-    authenticate_user! && @organization = current_user.organization
+  def require_agency!
+    authenticate_user! && @agency = current_user.agency
   end
 
 end
