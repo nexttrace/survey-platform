@@ -37,8 +37,8 @@ class SurveyInvitation < ApplicationRecord
 
   belongs_to :agency
 
-  has_one :respondent, dependent: :destroy
-  has_one :survey, through: :respondent
+  has_one :contact, dependent: :destroy
+  has_one :survey, through: :contact
 
   scope :unused, -> { where("used_at IS NULL") }
 

@@ -1,4 +1,4 @@
-class CodesController < RespondentController
+class CodesController < ContactsController
 
   def show
     @survey_invitation = SurveyInvitation.unused.find_by_token!(params[:id])
@@ -6,18 +6,18 @@ class CodesController < RespondentController
     SurveyInvitation.transaction do
       @survey_invitation.update!(used_at: Time.now)
 
-      @respondent = Respondent.create!(
+      @contact = Contact.create!(
         name: @survey_invitation.name,
         email: @survey_invitation.email,
         phone: @survey_invitation.phone,
         survey_invitation: @survey_invitation,
         agency: @survey_invitation.agency,
       )
-      sign_in @respondent
+      sign_in @contact
 
       @survey = Survey.create!(
         agency: @survey_invitation.agency,
-        respondent: @respondent
+        contact: @contact
       )
     end
 

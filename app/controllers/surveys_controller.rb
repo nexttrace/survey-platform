@@ -1,5 +1,5 @@
-class SurveysController < RespondentController
-  before_action :require_respondent!
+class SurveysController < ContactsController
+  before_action :require_contact!
   before_action :set_survey, only: [:show, :update]
 
   # # GET /surveys
@@ -59,8 +59,8 @@ private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_survey
-    @survey = current_respondent.survey
-    @agency = current_respondent.agency
+    @survey = current_contact.survey
+    @agency = current_contact.agency
   end
 
   # Only allow a trusted parameter "white list" through.
