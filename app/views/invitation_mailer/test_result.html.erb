@@ -1,6 +1,6 @@
-<h2>Notice from <%= @agency.name %></h2>
+<h2>Notice from <%= @invitation.agency.name %></h2>
 
-<p>Hello <%= @invitation.name %>,</p>
+<p>Hello <%= @invitation.contact.name %>,</p>
 
 <p>
   We are sorry to inform you that you have tested positive for COVID-19. We ask that you <b>please self-isolate for the next 7 days</b>, or until 3 days after your symptoms have completely resolved, whichever is longer. If your symptoms get worse, please phone your primary care practitioner to seek guidance before going to the hospital.
@@ -11,5 +11,5 @@
 </p>
 
 <p>
-  <%= link_to code_url(@invitation.token), code_url(@invitation.token) %>
+  <%= link_to @survey_url, @survey_url %>
 </p>

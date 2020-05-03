@@ -14,7 +14,7 @@ class Agency::ContactsController < AgencyController
 
   # GET /contact/new
   def new
-    @contact = @agency.contacts.new
+    @contact = Contact.new
   end
 
   # GET /contact/1/edit
@@ -24,11 +24,11 @@ class Agency::ContactsController < AgencyController
   # POST /contacts
   def create
     Contact.transaction do
-      @contact = @agency.contacts.new(contact_params)
+      @contact = Contact.new(contact_params)
 
       if @contact.save
-        invite_sms(@contact)
-        invite_email(@contact)
+        @agency.contacts << @contact
+        Invitation.send_test_result!(@agency, @contact)
         redirect_to agency_contacts_path, notice: "Survey contact was successfully created."
       else
         render :new
@@ -62,27 +62,6 @@ private
   # Only allow a trusted parameter "white list" through.
   def contact_params
     params.require(:contact).permit(:name, :email, :phone)
-  end
-
-  def invite_sms(si)
-    return unless si.phone && twilio.enabled?
-
-    sms_message = "Gotham Public Health: Unfortunately, you have tested positive for COVID-19. Please self-isolate for 7 days or until 3 days after you are completely better.\n\nTo help us stop COVID-19, please take this survey to tell us who you have had contact with: #{code_url(@contact.token)}"
-
-    twilio.client.messages.create(
-      from: twilio.phone_number,
-      to: si.phone,
-      body: sms_message
-    )
-  rescue
-    flash.alert = "SMS contact could not be sent"
-  end
-
-  def invite_email(si)
-    return unless si.email
-    InvitationMailer.with(contact: @contact).notification_email.deliver_now
-  rescue
-    flash.alert = "Contact email could not be sent"
   end
 
 end

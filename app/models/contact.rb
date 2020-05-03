@@ -19,11 +19,12 @@ class Contact < ApplicationRecord
 
   has_one :survey, dependent: :destroy
 
-  has_many :agencies, through: :agency_reports
   has_many :agency_reports, dependent: :destroy
   has_many :invitations, dependent: :destroy
-  has_many :reported_surveys, through: :survey_reports
   has_many :survey_reports, dependent: :destroy
+
+  has_many :reporting_agencies, through: :agency_reports, source: :agency
+  has_many :reporting_surveys, through: :survey_reports, source: :survey
 
   def self.fetch_resource_for_passwordless(info)
     find_by_lowercased_email(info) || find_by_normalized_phone(info)

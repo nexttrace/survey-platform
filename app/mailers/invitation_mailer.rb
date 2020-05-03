@@ -3,21 +3,20 @@ class InvitationMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.invitation_mailer.notification_email.subject
+  #   en.invitation_mailer.test_result.subject
   #
-  def notification_email
+  def test_result
     @invitation = params.fetch(:invitation)
-    @agency = @invitation.agency
-
-    mail to: @invitation.email
+    @survey_url = contacts.token_sign_in_url(@invitation.token)
+    mail to: @invitation.sent_to
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.invitation_mailer.contact_email.subject
+  #   en.invitation_mailer.contact_notice.subject
   #
-  def contact_email
+  def contact_notice
     @invitation = params.fetch(:invitation)
     @agency = @invitation.agency
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_225013) do
+ActiveRecord::Schema.define(version: 2020_05_03_024300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(version: 2020_05_02_225013) do
     t.bigint "contact_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "kind", null: false
+    t.bigint "agency_id", null: false
+    t.index ["agency_id"], name: "index_invitations_on_agency_id"
     t.index ["contact_id"], name: "index_invitations_on_contact_id"
   end
 
@@ -102,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_225013) do
 
   add_foreign_key "agency_reports", "agencies"
   add_foreign_key "agency_reports", "contacts"
+  add_foreign_key "invitations", "agencies"
   add_foreign_key "invitations", "contacts"
   add_foreign_key "survey_reports", "contacts"
   add_foreign_key "survey_reports", "surveys"
