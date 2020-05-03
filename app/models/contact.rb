@@ -21,7 +21,7 @@ class Contact < ApplicationRecord
 
   has_many :agencies, through: :agency_reports
   has_many :agency_reports, dependent: :destroy
-  has_many :invitations, depedent: :destroy
+  has_many :invitations, dependent: :destroy
   has_many :notices, dependent: :destroy
   has_many :reported_surveys, through: :survey_reports
   has_many :survey_reports, dependent: :destroy
