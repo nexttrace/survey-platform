@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # Survey takers
   passwordless_for :contacts, at: "/"
-  resources :codes, only: [:show]
   resource :survey, only: [:show, :update]
   get "/survey/:step", to: "surveys#show", as: :survey_step
 
