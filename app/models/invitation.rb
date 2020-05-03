@@ -6,6 +6,8 @@
 #  kind       :string           not null
 #  sent_to    :string
 #  sent_via   :string
+#  token      :string           not null
+#  used_at    :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  agency_id  :bigint           not null
@@ -15,6 +17,7 @@
 #
 #  index_invitations_on_agency_id   (agency_id)
 #  index_invitations_on_contact_id  (contact_id)
+#  index_invitations_on_token       (token) UNIQUE
 #
 # Foreign Keys
 #
@@ -31,11 +34,16 @@ class Invitation < ApplicationRecord
   belongs_to :contact
   belongs_to :agency
 
+  has_secure_token :token
+
+  scope :unused, -> { where(used_at: nil) }
   scope :for, -> (a, c) { where(agency: a, contact: c) }
+
   scope :email, -> { where(sent_via: "email") }
   scope :sms,   -> { where(sent_via: "sms") }
-  scope :test_result, -> { where(kind: "test_result") }
-  scope :test_result, -> { where(kind: "contact_notice") }
+
+  scope :contact_notice, -> { where(kind: "contact_notice") }
+  scope :test_result,    -> { where(kind: "test_result") }
 
   def self.send_test_result!(agency, contact)
     self.test_result.email.for(agency, contact).create! if contact.email
@@ -52,10 +60,6 @@ class Invitation < ApplicationRecord
     self.sent_to = email? ? contact.email : contact.phone
   end
 
-  before_create do
-    self.token = create_session_token!
-  end
-
   after_create do
     InvitationTexter.test_result(self).deliver_now if sms?
     InvitationMailer.test_result(self).deliver_now if email?
@@ -67,14 +71,6 @@ class Invitation < ApplicationRecord
 
   def email?
     sent_via == "email"
-  end
-
-  def create_session_token!
-    Passwordless::Session.create!(
-      authenticatable: contact,
-      user_agent: "#{sent_via} invitation",
-      remote_addr: 'unknown',
-    ).token
   end
 
 end

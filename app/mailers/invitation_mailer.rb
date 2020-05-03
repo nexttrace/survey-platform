@@ -7,7 +7,7 @@ class InvitationMailer < ApplicationMailer
   #
   def test_result(invitation)
     @invitation = invitation
-    @survey_url = contacts.token_sign_in_url(@invitation.token)
+    @survey_url = code_url(@invitation.token)
     mail to: @invitation.sent_to
   end
 

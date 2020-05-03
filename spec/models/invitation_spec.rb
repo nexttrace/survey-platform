@@ -6,6 +6,8 @@
 #  kind       :string           not null
 #  sent_to    :string
 #  sent_via   :string
+#  token      :string           not null
+#  used_at    :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  agency_id  :bigint           not null
@@ -15,6 +17,7 @@
 #
 #  index_invitations_on_agency_id   (agency_id)
 #  index_invitations_on_contact_id  (contact_id)
+#  index_invitations_on_token       (token) UNIQUE
 #
 # Foreign Keys
 #

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_024300) do
+ActiveRecord::Schema.define(version: 2020_05_03_051503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +47,11 @@ ActiveRecord::Schema.define(version: 2020_05_03_024300) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "kind", null: false
     t.bigint "agency_id", null: false
+    t.string "token", null: false
+    t.datetime "used_at"
     t.index ["agency_id"], name: "index_invitations_on_agency_id"
     t.index ["contact_id"], name: "index_invitations_on_contact_id"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
   end
 
   create_table "passwordless_sessions", force: :cascade do |t|
