@@ -23,7 +23,6 @@ class Agency::ContactsController < AgencyController
 
   # POST /contacts
   def create
-    raise "oh no"
     Contact.transaction do
       @contact = @agency.contacts.new(contact_params)
 
