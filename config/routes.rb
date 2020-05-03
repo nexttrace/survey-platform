@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   }
   namespace :agency do
     resource :dashboard, only: [:show]
-    resources :invitations
+    resources :contacts
   end
 
   # Public

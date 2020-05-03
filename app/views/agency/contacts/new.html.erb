@@ -1,0 +1,21 @@
+<h1>Report positive test and send survey</h1>
+
+<div class="columns">
+  <div class="column">
+
+    <%= form_with(model: [:agency, @contact], local: true) do |form| %>
+      <%= render 'form', contact: @contact, form: form %>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <%= form.submit "Report and send survey", class: "button is-link" %>
+        </div>
+        <div class="control">
+          <%= link_to "Cancel", agency_contacts_path, class: "button is-link is-light" %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+  <div class="column"></div>
+</div>
