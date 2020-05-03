@@ -29,16 +29,21 @@ class Agency::ContactsController < AgencyController
       if @contact.save
         @agency.contacts << @contact
         Invitation.send_test_result!(@agency, @contact)
-        redirect_to agency_contacts_path, notice: "Survey contact was successfully created."
+        redirect_to agency_contacts_path, notice: "Survey invitation successfully sent."
       else
         render :new
-        raise ActiveRecord::Rollback, "Survey failed to save"
+        raise ActiveRecord::Rollback, "Survey contact failed to save"
       end
     end
   end
 
   # PATCH/PUT /contacts/1
   def update
+    if params[:resend_invitation]
+      Invitation.send_test_result!(@agency, @contact)
+      return redirect_to agency_contacts_path, notice: 'Survey invitation sent again.'
+    end
+
     if @contact.update(contact_params)
       redirect_to agency_contacts_path, notice: 'Survey contact was successfully updated.'
     else
