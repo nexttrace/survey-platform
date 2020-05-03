@@ -9,7 +9,9 @@ gem "devise", "~> 4.7"
 gem "nilify_blanks", "~> 1.4"
 gem "passwordless", "~> 0.9.0"
 gem "pg", ">= 0.18", "< 2.0"
+gem "phony_rails", "~> 0.14.13"
 gem "puma", "~> 4.1"
+gem "sendgrid-actionmailer", "~> 3.0"
 gem "turbolinks", "~> 5"
 gem "twilio-ruby", "~> 5.33"
 gem "webpacker", "~> 5.1"
@@ -28,5 +30,3 @@ group :development do
   gem "web-console", ">= 3.3.0"
   gem "letter_opener", "~> 1.7"
 end
-
-gem "sendgrid-actionmailer", "~> 3.0"

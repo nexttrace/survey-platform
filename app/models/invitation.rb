@@ -18,33 +18,9 @@
 #  fk_rails_...  (contact_id => contacts.id)
 #
 class Invitation < ApplicationRecord
-  nilify_blanks
-  before_validation :standardize_phone
+  validates :contact, presence: true
+  validates :sent_via, presence: true
+  validates :sent_to, presence: true
 
-  validates :agency, presence: true
-  validates :name, presence: true
-  validates :phone, uniqueness: { allow_nil: true }, numericality: true, length: {is: 10}
-  validates :email, uniqueness: { allow_nil: true, case_sensitive: false }
-  validate :has_contact_method
-
-  has_secure_token :token
-
-  belongs_to :agency
-
-  has_one :contact, dependent: :destroy
-  has_one :survey, through: :contact
-
-  scope :unused, -> { where("used_at IS NULL") }
-
-private
-
-  def standardize_phone
-    return unless phone
-    self.phone = phone.gsub(/^+1/, '').gsub(/[^0-9]/, '')
-  end
-
-  def has_contact_method
-    errors.add(:base, "Either email or phone is required") if email.blank? && phone.blank?
-  end
-
+  belongs_to :contact
 end
