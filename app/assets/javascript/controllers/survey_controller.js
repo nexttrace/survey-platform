@@ -2,19 +2,20 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "householdTable" ]
+  static targets = [ "contacts" ]
 
-  addMoreHousehold() {
-    let lastRow = this.householdTableTarget.rows[this.householdTableTarget.rows.length - 1]
-    let newRow = lastRow.cloneNode(true)
+  addContact() {
+    let contacts = this.contactsTarget.getElementsByClassName("contact")
+    let newContact = contacts[0].cloneNode(true)
+    newContact.getElementsByClassName("contact-number")[0].innerText = contacts.length + 1
 
     // clear inputs
-    let inputs = newRow.getElementsByTagName("input")
+    let inputs = newContact.getElementsByTagName("input")
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = ""        
     }
 
-    lastRow.parentNode.append(newRow)
+    this.contactsTarget.append(newContact)
   }
 
   householdSelected() {
