@@ -5,4 +5,6 @@ end
 
 if Twilio.auth_token
   Rails.configuration.twilio_phone_number = ENV.fetch("TWILIO_PHONE_NUMBER")
+else
+  Rails.configuration.twilio_phone_number = "+15555555555"
 end

@@ -61,7 +61,7 @@ class Invitation < ApplicationRecord
   end
 
   after_create do
-    InvitationTexter.test_result(self).deliver_now if sms?
+    InvitationTexter.test_result(self).deliver_now if sms? && Twilio.auth_token
     InvitationMailer.test_result(self).deliver_now if email?
   end
 
