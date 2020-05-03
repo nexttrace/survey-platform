@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 2020_05_02_225013) do
     t.string "phone"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.string "sent_via"
+    t.string "sent_to"
+    t.bigint "contact_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_invitations_on_contact_id"
+  end
+
   create_table "passwordless_sessions", force: :cascade do |t|
     t.string "authenticatable_type"
     t.bigint "authenticatable_id"
@@ -51,21 +60,6 @@ ActiveRecord::Schema.define(version: 2020_05_02_225013) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
-  end
-
-  create_table "survey_invitations", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.bigint "agency_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "token"
-    t.datetime "used_at"
-    t.index ["agency_id"], name: "index_survey_invitations_on_agency_id"
-    t.index ["email"], name: "index_survey_invitations_on_email", unique: true
-    t.index ["phone"], name: "index_survey_invitations_on_phone", unique: true
-    t.index ["token"], name: "index_survey_invitations_on_token", unique: true
   end
 
   create_table "survey_reports", force: :cascade do |t|
@@ -108,7 +102,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_225013) do
 
   add_foreign_key "agency_reports", "agencies"
   add_foreign_key "agency_reports", "contacts"
-  add_foreign_key "survey_invitations", "agencies"
+  add_foreign_key "invitations", "contacts"
   add_foreign_key "survey_reports", "contacts"
   add_foreign_key "survey_reports", "surveys"
   add_foreign_key "surveys", "agencies"

@@ -1,11 +1,11 @@
-<% if survey_invitation.errors.any? %>
+<% if invitation.errors.any? %>
   <article class="message is-danger">
     <div class="message-header">
       <p>Couldn't save survey invitation</p>
     </div>
     <div class="message-body">
       <ul>
-        <% survey_invitation.errors.full_messages.each do |message| %>
+        <% invitation.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

@@ -1,29 +1,23 @@
 # == Schema Information
 #
-# Table name: survey_invitations
+# Table name: invitations
 #
 #  id         :bigint           not null, primary key
-#  email      :string
-#  name       :string
-#  phone      :string
-#  token      :string
-#  used_at    :datetime
+#  sent_to    :string
+#  sent_via   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  agency_id  :bigint           not null
+#  contact_id :bigint           not null
 #
 # Indexes
 #
-#  index_survey_invitations_on_agency_id  (agency_id)
-#  index_survey_invitations_on_email      (email) UNIQUE
-#  index_survey_invitations_on_phone      (phone) UNIQUE
-#  index_survey_invitations_on_token      (token) UNIQUE
+#  index_invitations_on_contact_id  (contact_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (agency_id => agencies.id)
+#  fk_rails_...  (contact_id => contacts.id)
 #
-class SurveyInvitation < ApplicationRecord
+class Invitation < ApplicationRecord
   nilify_blanks
   before_validation :standardize_phone
 

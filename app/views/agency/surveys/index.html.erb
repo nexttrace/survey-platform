@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Agency Surveys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @agency_surveys.each do |agency_survey| %>
+      <tr>
+        <td><%= link_to 'Show', agency_survey %></td>
+        <td><%= link_to 'Edit', edit_agency_survey_path(agency_survey) %></td>
+        <td><%= link_to 'Destroy', agency_survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Agency Survey', new_agency_survey_path %>

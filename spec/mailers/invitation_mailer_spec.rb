@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe SurveyInvitationMailer, type: :mailer do
+RSpec.describe InvitationMailer, type: :mailer do
   describe "notification_email" do
-    let(:mail) { SurveyInvitationMailer.notification_email }
+    let(:mail) { InvitationMailer.notification_email }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Notification email")
@@ -16,7 +16,7 @@ RSpec.describe SurveyInvitationMailer, type: :mailer do
   end
 
   describe "contact_email" do
-    let(:mail) { SurveyInvitationMailer.contact_email }
+    let(:mail) { InvitationMailer.contact_email }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Contact email")
