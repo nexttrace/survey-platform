@@ -105,5 +105,7 @@ Rails.application.configure do
       api_key: ENV.fetch('SENDGRID_API_KEY'),
       raise_delivery_errors: true
     }
+
+    config.textris_delivery_method = [:twilio, :log]
   end
 end

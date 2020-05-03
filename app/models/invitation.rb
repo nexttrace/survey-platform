@@ -22,8 +22,10 @@
 #  fk_rails_...  (contact_id => contacts.id)
 #
 class Invitation < ApplicationRecord
-  validates :contact, presence: true
+  validates :contact,  presence: true
+  validates :sent_to,  presence: true
   validates :sent_via, presence: true
+
   validates :kind, inclusion: { in: %w[test_result contact_notice] }
 
   belongs_to :contact
@@ -46,8 +48,18 @@ class Invitation < ApplicationRecord
   #   self.contact_notice.sms.for(agency, contact).create! if contact.phone
   # end
 
-  before_save :send_sms, if: :sms?
-  before_save :send_email, if: :email?
+  before_validation do
+    self.sent_to = email? ? contact.email : contact.phone
+  end
+
+  before_create do
+    self.token = create_session_token!
+  end
+
+  after_create do
+    InvitationTexter.test_result(self).deliver_now if sms?
+    InvitationMailer.test_result(self).deliver_now if email?
+  end
 
   def sms?
     sent_via == "sms"
@@ -57,28 +69,8 @@ class Invitation < ApplicationRecord
     sent_via == "email"
   end
 
-  def send_sms
-    self.sent_to = contact.phone
-    generate_token!
-
-    sms_message = "Gotham Public Health: Unfortunately, you have tested positive for COVID-19. Please self-isolate for 7 days or until 3 days after you are completely better.\n\nTo help us stop COVID-19, please take this survey to tell us who you have had contact with: #{token}"
-
-    twilio.client.messages.create(
-      from: twilio.phone_number,
-      to: contact.phone,
-      body: sms_message
-    )
-  end
-
-  def send_email
-    self.sent_to = contact.email
-    generate_token!
-
-    InvitationMailer.with(invitation: self).test_result.deliver_now
-  end
-
-  def generate_token!
-    self[:token] ||= Passwordless::Session.create!(
+  def create_session_token!
+    Passwordless::Session.create!(
       authenticatable: contact,
       user_agent: "#{sent_via} invitation",
       remote_addr: 'unknown',

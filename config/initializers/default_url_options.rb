@@ -40,3 +40,10 @@ Rails.application.config.after_initialize do |app|
     engine.routes.default_url_options.merge!(Rails.application.routes.default_url_options)
   end
 end
+
+Rails.application.config.to_prepare do
+  ApplicationController.renderer.defaults.merge!(
+    http_host: options[:host],
+    https: options[:protocol] == "https",
+  )
+end

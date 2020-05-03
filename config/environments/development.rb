@@ -31,20 +31,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   # config.active_storage.service = :local
 
-  # Show emails in the browser
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.perform_caching = false
-
-  if ENV.has_key?("SENDGRID_API_KEY")
-    config.action_mailer.delivery_method = :sendgrid_actionmailer
-    config.action_mailer.sendgrid_actionmailer_settings = {
-      api_key: ENV['SENDGRID_API_KEY'],
-      raise_delivery_errors: true
-    }
-  else
-    config.action_mailer.delivery_method = :letter_opener
-  end
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -63,4 +49,25 @@ Rails.application.configure do
 
   # Allow forcing SSL for dev setups that want it
   config.force_ssl = ENV.has_key?("FORCE_SSL")
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_caching = false
+
+  if ENV.has_key?("SENDGRID_API_KEY")
+    config.action_mailer.delivery_method = :sendgrid_actionmailer
+    config.action_mailer.sendgrid_actionmailer_settings = {
+      api_key: ENV['SENDGRID_API_KEY'],
+      raise_delivery_errors: true
+    }
+  else
+    # Show emails in a new browser tab
+    config.action_mailer.delivery_method = :letter_opener
+  end
+
+  if ENV.has_key?("TWILIO_AUTH_TOKEN")
+    config.textris_delivery_method = [:twilio, :log]
+  else
+    config.textris_delivery_method = :log
+  end
+
 end
