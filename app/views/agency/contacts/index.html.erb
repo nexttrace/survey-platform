@@ -22,8 +22,14 @@
         <td><%= contact.name %></td>
         <td><%= contact.email %></td>
         <td><%= contact.phone %></td>
-        <td><%= link_to 'Edit', edit_agency_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', [:agency, contact], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_agency_contact_path(contact), class: "button" %></td>
+        <td><%= link_to 'Destroy', [:agency, contact], method: :delete, data: { confirm: 'Are you sure?' }, class: "button is-danger" %></td>
+        <td>
+          <%= form_with(model: [:agency, contact], local: true) do |form| %>
+            <%= hidden_field_tag :resend_invitation, true %>
+            <%= form.submit "Resend link", class: "button is-link" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,16 +1,5 @@
 <h1>Editing Contact</h1>
 
-<%= form_with(model: [:agency, @contact], local: true) do |form| %>
-  <%= hidden_field_tag :resend_invitation, true %>
-  <div class="field is-grouped">
-    <div class="control">
-      <%= form.submit "Resend survey invitation", class: "button is-link" %>
-    </div>
-  </div>
-<% end %>
-
-<p></p>
-
 <div class="columns">
   <div class="column is-half">
     <%= form_with(model: [:agency, @contact], local: true) do |form| %>
