@@ -17,6 +17,8 @@ steps:
             "--platform", "managed", 
             "--region", "${_REGION}",
             "--image", "gcr.io/$PROJECT_ID/${_SERVICE}"]
+options:
+  machineType: 'N1_HIGHCPU_8'
 
 # substitutions:
 #   _REGION: (the region)

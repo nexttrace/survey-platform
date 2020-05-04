@@ -19,7 +19,7 @@ RUN bundle config frozen true && \
     bundle config build.sassc --disable-march-tune-native && \
     bundle config build.google-protobuf --with-cflags=-D__va_copy=va_copy && \
     bundle config without 'development test' && \
-    bundle install -j4 --retry 3
+    bundle install -j8 --retry 3
 
 # Verify that protobufs installed? ugh
 RUN ruby -e "require 'grpc'; require 'google/protobuf/any_pb'"
@@ -32,7 +32,7 @@ RUN yarn install --frozen-lockfile
 
 # Update gems if needed
 ONBUILD COPY Gemfile* .ruby-version /app/
-ONBUILD RUN bundle install -j4 --retry 3 && \
+ONBUILD RUN bundle install -j8 --retry 3 && \
             # Remove unneeded gems
             bundle clean --force && \
             # Remove unneeded files from installed gems (cached *.gem, *.o, *.c)

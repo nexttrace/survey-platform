@@ -3,4 +3,6 @@ steps:
   args: [ 'build', '.',
           '-f', 'Dockerfile-base',
           '-t', 'gcr.io/${PROJECT_ID}/nexttrace-base' ]
+options:
+  machineType: 'N1_HIGHCPU_8'
 images: ['gcr.io/${PROJECT_ID}/nexttrace-base']
