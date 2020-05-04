@@ -1,5 +1,4 @@
 class Agency::ContactsController < AgencyController
-  before_action :require_agency!
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   # GET /contacts
