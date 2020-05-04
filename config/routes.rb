@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
   }
   namespace :agency do
-    resource :dashboard, only: [:show]
+    resource :dashboard, only: [:show, :create]
     resources :contacts
   end
 

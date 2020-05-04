@@ -8,11 +8,15 @@
 
 <div class="field is-grouped">
   <div class="control">
-    <%= link_to "Report positive test and send survey", new_agency_contact_path, class: "button is-outlined" %>
+    <%= link_to "Report positive test / start survey", new_agency_contact_path, class: "button is-light" %>
   </div>
 
   <div class="control">
     <%= link_to "View survey contacts", agency_contacts_path, class: "button is-link" %>
+  </div>
+
+  <div class="control">
+    <%= button_to "View sample survey", agency_dashboard_path, class: "button is-warning" %>
   </div>
 </div>
 
