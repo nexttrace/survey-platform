@@ -1,4 +1,6 @@
 class CodesController < ContactsController
+  before_action :require_no_contact!
+
   def show
     @invitation = Invitation.unused.find_by_token!(params[:id])
 
@@ -17,4 +19,11 @@ class CodesController < ContactsController
   rescue ActiveRecord::RecordNotFound
     redirect_to survey_path, alert: 'That link has expired. Send yourself a new link.'
   end
+
+private
+
+  def require_no_contact!
+    return redirect_to survey_path if current_contact
+  end
+
 end
