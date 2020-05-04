@@ -31,7 +31,7 @@ class Contact < ApplicationRecord
   end
 
   def self.find_by_lowercased_email(email)
-    where("lower(email) = ?", info.downcase).first
+    where("lower(email) = ?", email.downcase).first
   end
 
   def self.find_by_normalized_phone(phone)
