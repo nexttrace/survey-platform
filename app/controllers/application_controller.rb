@@ -7,9 +7,4 @@ private
     stored_location_for(resource) || agency_dashboard_path
   end
 
-  # non-user stuff
-  def twilio
-    Rails.application.config.twilio
-  end
-
 end
