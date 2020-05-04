@@ -9,7 +9,8 @@ RUN addgroup -g 1000 -S app && \
 RUN apk add --update --no-cache \
       postgresql-client \
       tzdata \
-      file
+      file \
+      libc6-compat
 
 # Configure Rails
 ENV RAILS_LOG_TO_STDOUT true
