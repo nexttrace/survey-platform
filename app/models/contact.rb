@@ -26,8 +26,11 @@ class Contact < ApplicationRecord
   has_many :reporting_agencies, through: :agency_reports, source: :agency
   has_many :reporting_surveys, through: :survey_reports, source: :survey
 
+  attr_accessor :found_by # so we can send survey links to the info given to us
+
   def self.fetch_resource_for_passwordless(info)
-    find_by_lowercased_email(info) || find_by_normalized_phone(info)
+    find_by_lowercased_email(info)&.tap{|c| c.found_by = "email" } ||
+      find_by_normalized_phone(info)&.tap{|c| c.found_by = "phone" }
   end
 
   def self.find_by_lowercased_email(email)
@@ -35,7 +38,7 @@ class Contact < ApplicationRecord
   end
 
   def self.find_by_normalized_phone(phone)
-    find_by_phone PhonyRails.normalize_number(phone)
+    find_by_phone PhonyRails.normalize_number(phone, default_country_code: "US")
   end
 
 private

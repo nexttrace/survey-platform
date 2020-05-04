@@ -37,5 +37,12 @@ en:
       subject: "COVID-19 Contact Notification"
   passwordless:
     sessions:
+      create:
+        session_expired: "Your session has expired, please sign in again."
+        email_sent_if_record_found: "If we found you in the system, we've sent you a link."
+        token_claimed: "This link has already been used, please request a new link."
       new:
-        submit: "Email link to survey"
+        submit: "Send survey link"
+    mailer:
+      subject: "Your survey link"
+      magic_link: "Here's your link to the contact tracing survey: %{link}"
