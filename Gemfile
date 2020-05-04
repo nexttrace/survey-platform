@@ -19,7 +19,9 @@ gem "webpacker", "~> 5.1"
 
 group :production do
   gem "stackdriver", "~> 0.16.1"
-  gem "google-protobuf", github: "protocolbuffers/protobuf", glob: "ruby/*.gemspec"
+  # Force building from source via platform, binary gems broken on Alpine
+  gem "google-protobuf", "~> 3.11", platform: [:ruby]
+  gem "grpc",            "~> 1.28", platform: [:ruby]
 end
 
 group :development, :test do
@@ -36,3 +38,4 @@ group :development do
   gem "web-console", ">= 3.3.0"
   gem "letter_opener", "~> 1.7"
 end
+

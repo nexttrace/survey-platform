@@ -12,20 +12,25 @@ RUN apk add --update --no-cache \
 
 WORKDIR /app
 
-# Install standard Node modules
+# Install gems (for production only)
+COPY Gemfile* .ruby-version /app/
+RUN bundle config frozen true && \
+    bundle config force_ruby_platform true && \
+    bundle config build.sassc --disable-march-tune-native && \
+    bundle config build.google-protobuf --with-cflags=-D__va_copy=va_copy && \
+    bundle config without 'development test' && \
+    bundle install -j4 --retry 3
+
+# Verify that protobufs installed? ugh
+RUN ruby -e "require 'grpc'; require 'google/protobuf/any_pb'"
+
+# Install Node modules
 COPY package.json yarn.lock /app/
 RUN yarn install --frozen-lockfile
 
-# Install standard gems
-COPY Gemfile* .ruby-version /app/
-RUN bundle config --local frozen 1 && \
-    bundle config --local build.sassc --disable-march-tune-native && \
-    bundle config --local without 'development test' && \
-    bundle install -j4 --retry 3
-
 #### ONBUILD: Add triggers to the image, executed later while building a child image
 
-# Install Ruby gems (for production only)
+# Update gems if needed
 ONBUILD COPY Gemfile* .ruby-version /app/
 ONBUILD RUN bundle install -j4 --retry 3 && \
             # Remove unneeded gems
@@ -35,6 +40,7 @@ ONBUILD RUN bundle install -j4 --retry 3 && \
             find /usr/local/bundle/gems/ -name "*.c" -delete && \
             find /usr/local/bundle/gems/ -name "*.o" -delete
 
+# Update Node modules if needed
 ONBUILD COPY package.json yarn.lock /app/
 ONBUILD RUN yarn install --frozen-lockfile
 
