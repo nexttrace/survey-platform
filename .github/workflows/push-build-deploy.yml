@@ -50,4 +50,5 @@ jobs:
     - name: Deploy
       run: |-
         gcloud run deploy "$SERVICE_NAME" \
-          --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+          --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
+          --platform "managed"
