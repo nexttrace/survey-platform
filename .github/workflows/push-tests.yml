@@ -1,4 +1,4 @@
-name: CI
+name: Run RSpec tests
 on:
   push:
     branches: [ master ]
@@ -18,9 +18,9 @@ jobs:
           POSTGRES_PASSWORD: ""
         options: >-
           --health-cmd pg_isready
-          --health-interval 2s
+          --health-interval 10s
           --health-timeout 5s
-          --health-retries 10
+          --health-retries 5
         ports: ["5432:5432"]
 
     steps:
@@ -52,7 +52,7 @@ jobs:
       - name: Find yarn cache location
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: JS package cache
+      - name: Cache Node modules
         uses: actions/cache@v1
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
@@ -67,9 +67,8 @@ jobs:
         env:
           RAILS_ENV: test
           PGHOST: localhost
-          PGUSER: myapp
-        run: |
-          bin/rails db:setup
+          PGUSER: nexttrace
+        run: bin/rails db:setup
 
       - name: Run tests
         run: bin/rspec
