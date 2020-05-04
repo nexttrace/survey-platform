@@ -14,9 +14,9 @@ more than 5 minutes.
 <div class="field">
     <%= label_tag :residence, "Where do you reside?", class: "label" %>
     <div class="control">
-      <%= radio_button_tag :residence, "household", nil, "data-action": "change->survey#householdSelected" %>
+      <%= data.radio_button :residence, "household", "data-action": "change->survey#householdSelected" %>
       <%= label_tag :residence_household, "House/apartment/condo", class: "radio" %> <br>
-      <%= radio_button_tag :residence, "group", nil, "data-action": "change->survey#groupSelected"  %>
+      <%= data.radio_button :residence, "group", "data-action": "change->survey#groupSelected"  %>
       <%= label_tag :residence_group, "Institution or group setting", class: "radio is-relative is-inline-block" %>
       <span class="subtext">(e.g. college dormitories, long term care facilities (nursing homes),
       group homes, correctional facilities, or a military base)</span>
