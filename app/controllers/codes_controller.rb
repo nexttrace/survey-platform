@@ -1,4 +1,4 @@
-class CodesController < ContactsController
+class CodesController < ApplicationController
   before_action :require_no_contact!
 
   def show
@@ -12,7 +12,7 @@ class CodesController < ContactsController
         contact: @invitation.contact,
       )
 
-      sign_in @invitation.contact
+      passwordless.sign_in @invitation.contact
     end
 
     redirect_to survey_path

@@ -1,4 +1,4 @@
-class SurveysController < ContactsController
+class SurveysController < ApplicationController
   before_action :require_contact!
   before_action :set_survey, only: [:show, :update]
 
