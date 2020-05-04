@@ -36,8 +36,9 @@ jobs:
       - name: Install gems
         env:
           BUNDLE_FROZEN: "true"
-          BUNDLE_PATH: "vendor/bundle"
-        run: bundle install --jobs 4 --retry 3
+        run: |
+          bundle config set path vendor/bundle
+          bundle install --jobs 4 --retry 3
 
       - name: Setup Node
         uses: actions/setup-node@v1
