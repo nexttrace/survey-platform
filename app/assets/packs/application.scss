@@ -11,14 +11,12 @@ $navbar-item-img-max-height: 40px;
 $navbar-height: 5.5rem;
 $footer-background-color: false;
 $footer-padding: 3rem 0;
+@import "~bulma/bulma";
 
 $steps-completed-color: #ad56cd;
 $steps-active-color: #4a3b85;
 $steps-divider-size: 0.1em;
 $steps-default-color: hsl(0, 0%, 96%);
-
-@import "~bulma/bulma";
-
 @import "~bulma-o-steps/bulma-steps";
 
 @import "flatpickr";
@@ -47,7 +45,7 @@ $steps-default-color: hsl(0, 0%, 96%);
 	font-weight: bold;
 }
 
-.button.is-link {
+input.button {
 	padding-top: 0.3em;
 }
 
