@@ -12,12 +12,15 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "phony_rails", "~> 0.14.13"
 gem "puma", "~> 4.1"
 gem "sendgrid-actionmailer", "~> 3.0"
-gem "stackdriver", "~> 0.16.1"
-gem "google-protobuf", github: "protocolbuffers/protobuf", glob: "ruby/*.gemspec"
 gem "textris", "~> 0.7.1", github: "indirect/textris" # fork for Rails 6 compat
 gem "turbolinks", "~> 5"
 gem "twilio-ruby", "~> 5.33"
 gem "webpacker", "~> 5.1"
+
+group :production do
+  gem "stackdriver", "~> 0.16.1"
+  gem "google-protobuf", github: "protocolbuffers/protobuf", glob: "ruby/*.gemspec"
+end
 
 group :development, :test do
   gem "annotate", "~> 3.1"
