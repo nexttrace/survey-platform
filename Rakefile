@@ -6,5 +6,7 @@ require_relative 'config/application'
 Rails.application.load_tasks
 
 # Prevent duplicate `yarn install` on assets:precompile
+Rake::Task["webpacker:yarn_install"].clear
+namespace(:webpacker) { task(:yarn_install) { puts "skipping webpacker:yarn_install" } }
 Rake::Task["yarn:install"].clear
-namespace(:yarn) { task(:install) {} }
+namespace(:yarn) { task(:install) { puts "skipping yarn:install" } }
