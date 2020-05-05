@@ -36,10 +36,9 @@ class SurveysController < ApplicationController
 
   # PATCH/PUT /surveys/1
   def update
-    # for now, assume we just go to step n+1; need to handle last step case
     if @survey.update(survey_params)
       if params.has_key?(:next_step)
-        return redirect_to(survey_step_path(params[:next_step].to_i))
+        return redirect_to(survey_step_path(params[:next_step]))
       else
         # go to the start of the form? ¯\_(ツ)_/¯
         return redirect_to(survey_step_path(1))

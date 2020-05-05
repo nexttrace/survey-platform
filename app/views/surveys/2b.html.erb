@@ -1,0 +1,88 @@
+<div data-controller="contacts">
+
+<%= form_for @survey, url: survey_path do |f| %>
+<%= f.fields_for :data, @survey.data do |data| %>
+
+<h3>From <span class="start-date"></span> to <span class="end-date"></span>, did anyone come to your home?</h3>
+
+<p class="subtext">(i.e. relatives, friends, neighbors, contractors, superintendents, home health aides)</p>
+
+
+  <div class="media-left is-pulled-left">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect width="48" height="48" fill="url(#pattern-dinner)"/>
+    <defs>
+    <pattern id="pattern-dinner" patternContentUnits="objectBoundingBox" width="1" height="1">
+    <use xlink:href="#image-dinner" transform="scale(0.0208333)"/>
+    </pattern>
+    <image id="image-dinner" width="48" height="48" xlink:href="data:image/png;base64,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"/>
+    </defs>
+    </svg>
+  </div>
+
+  <div class="media-content is-clearfix">
+    <p>
+      Maybe you had friends or family over for dinner?
+    </p>
+  </div>
+
+
+  <div class="media-left is-pulled-left">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect width="48" height="48" fill="url(#pattern-contractor)"/>
+    <defs>
+    <pattern id="pattern-contractor" patternContentUnits="objectBoundingBox" width="1" height="1">
+    <use xlink:href="#image-contractor" transform="scale(0.0208333)"/>
+    </pattern>
+    <image id="image-contractor" width="48" height="48" xlink:href="data:image/png;base64,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"/>
+    </defs>
+    </svg>
+  </div>
+
+  <div class="media-content is-clearfix">
+    <p>
+      Or a contractor performed work on your home?
+    </p>
+  </div>
+
+<br>
+
+<div class="contacts" data-target="contacts.contacts">
+    <div class="contact">
+      <p class="label">Contact #<span class="contact-number">1</span></p>
+      <div class="control">
+        <%= data.text_field :name, class: "input", placeholder: "Name" %>
+      </div>
+      <div class="control">
+        <%= data.telephone_field :phone, class: "input", placeholder: "Phone number" %><br>
+      </div>
+      <div class="control">
+        <%= data.email_field :email, class: "input", placeholder: "Email address" %><br>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    <a data-action="click->contacts#addContact" class="is-link">Add contact</a>
+  </p>
+
+<!--
+  For each reported contact, it would be helpful in the actual survey design to somehow be able
+  to check whether it was one time contact, and then you would be prompted to give the date of
+  last contact, or whether it’s an ongoing exposure.
+-->
+
+</div>
+
+<br><br> <!-- bleh -->
+
+<p>
+  <input type="hidden" name="next_step" value="3" />
+  <%= f.submit "Next: Contacts at work", class: "button is-primary is-fullwidth" %>
+</p>
+
+
+<% end %>
+<% end %>
+
+</div>

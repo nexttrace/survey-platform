@@ -1,4 +1,4 @@
-<div data-controller="survey">
+<div data-controller="household contacts">
 
 <%= form_for @survey, url: survey_path do |f| %>
 <%= f.fields_for :data, @survey.data do |data| %>
@@ -14,9 +14,9 @@ more than 5 minutes.
 <div class="field">
     <%= label_tag :residence, "Where do you reside?", class: "label" %>
     <div class="control">
-      <%= data.radio_button :residence, "household", "data-action": "change->survey#householdSelected", "data-target": "survey.householdButton" %>
+      <%= data.radio_button :residence, "household", "data-action": "change->household#householdSelected", "data-target": "household.householdButton" %>
       <%= label_tag :residence_household, "House/apartment/condo", class: "radio" %> <br>
-      <%= data.radio_button :residence, "group", "data-action": "change->survey#groupSelected", "data-target": "survey.groupButton"  %>
+      <%= data.radio_button :residence, "group", "data-action": "change->household#groupSelected", "data-target": "household.groupButton"  %>
       <%= label_tag :residence_group, "Institution or group setting", class: "radio is-relative is-inline-block" %>
       <span class="subtext">(e.g. college dormitories, long term care facilities (nursing homes),
       group homes, correctional facilities, or a military base)</span>
@@ -45,7 +45,7 @@ more than 5 minutes.
 
   <p><strong>Excluding yourself</strong>, list the people in your household <strong>over the age of 18.</p>
 
-  <div class="contacts" data-target="survey.contacts">
+  <div class="contacts" data-target="contacts.contacts">
     <div class="contact">
       <p class="label">Contact #<span class="contact-number">1</span></p>
       <div class="control">
@@ -61,7 +61,7 @@ more than 5 minutes.
   </div>
 
   <p>
-    <a data-action="click->survey#addContact" class="is-link">Add contact</a>
+    <a data-action="click->contacts#addContact" class="is-link">Add contact</a>
   </p>
 
 </div>
@@ -99,29 +99,17 @@ more than 5 minutes.
 
   <button data-action="click->survey#addMoreGroup" class="button is-primary is-small">Add another</button>
 
-<p class="question">
-  Question 2: From  <autofill date range for infectious period>, did anyone come to your home?
-  <span class="subtext">Possible examples could be relatives, friends, neighbors, contractors, superintendents, home
-  health aides, or first responders. Please do not include delivery personnel unless you came
-  within 6 feet of them.</span>
-</p>
-
-<p>
-  For each person, please give their name, telephone number and the dates you had contact with 
-  them, and any additional contact information that may help us get in contact with them.
-</p>
-
-<p>
-  For each reported contact, it would be helpful in the actual survey design to somehow be able
-  to check whether it was one time contact, and then you would be prompted to give the date of
-  last contact, or whether it’s an ongoing exposure.
-</p>
-
 </div>
 
 <br><br> <!-- bleh -->
-<p>
-  <input type="hidden" name="next_step" value="<%= params[:step].to_i + 1 %>" />
+
+<p class="is-hidden" data-target="household.nextHouseholdVisitors">
+  <input type="hidden" name="next_step" class="next-step" value="2b" />
+  <%= f.submit "Next: Household Visitors", class: "button is-primary is-fullwidth" %>
+</p>
+
+<p class="is-hidden" data-target="household.nextWorkContacts">
+  <input type="hidden" name="next_step_disabled" class="next-step" value="3" />
   <%= f.submit "Next: Contacts at work", class: "button is-primary is-fullwidth" %>
 </p>
 
