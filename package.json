@@ -9,7 +9,7 @@
     "bulma": "^0.8.2",
     "bulma-o-steps": "^1.0.9",
     "flatpickr": "^4.6.3",
-    "jquery": "^3.5.0",
+    "jquery": "^3.5.1",
     "stimulus": "^1.1.1",
     "stimulus-flatpickr": "^1.2.4",
     "turbolinks": "^5.2.0"
