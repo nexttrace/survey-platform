@@ -2,7 +2,16 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "contacts" ]
+  static targets = [ "contacts",  "householdButton", "groupButton" ]
+
+  connect() {
+    if (this.householdButtonTarget.checked) {
+      this.householdSelected()
+    } else if (this.groupButtonTarget.checked) {
+      this.groupSelected()
+    }
+    super.connect()
+  }
 
   addContact() {
     let contacts = this.contactsTarget.getElementsByClassName("contact")
