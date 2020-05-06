@@ -122,6 +122,9 @@ Rails.application.configure do
       user_id: controller.current_user.try(:id),
     }
   end
+  config.lograge.custom_options = lambda do |event|
+    { status: event.payload[:status].to_s }
+  end
 
   config.lograge_sql.extract_event = Proc.new do |event|
     { name: event.payload[:name], duration: event.duration.to_f.round(2), sql: event.payload[:sql] }
