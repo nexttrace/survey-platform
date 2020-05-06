@@ -5,7 +5,7 @@ options = {
 case Rails.env
 when "production"
   if ENV.has_key?("ASSET_COMPILATION")
-    options[:host] = ENV.fetch("DEFAULT_URL_HOST", "nexttrace.test")
+    options[:host] = ENV.fetch("DEFAULT_URL_HOST", "asset-compilation.example.com")
   else
     options[:host] = ENV.fetch("DEFAULT_URL_HOST")
   end
@@ -24,6 +24,8 @@ end
 
 # Hosts have to be added now, before `after_initialize`
 Rails.configuration.tap do |config|
+  # not a Rails config, but we can use this elsewhere
+  config.primary_host = options[:host]
   config.hosts << options[:host] unless config.hosts.include?(options[:host])
 end
 

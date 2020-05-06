@@ -137,4 +137,9 @@ Rails.application.configure do
     # This seems to need Rails boot stuff, so wait to load until after initializers
     require 'lograge/sql/extension'
   end
+
+  # Google Logging uses this to generate the full log name, e.g.
+  # projects/dynamic-return-274121/logs/#{log_name}
+  # see also config/initializers/default_url_options.rb
+  config.google_cloud.logging.log_name = [Rails.configuration.primary_host, "rails"].join("/")
 end
