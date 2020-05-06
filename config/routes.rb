@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   # Public
   root to: "home#index"
+  get '*unmatched_route', to: 'application#route_not_found'
 end

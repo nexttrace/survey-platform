@@ -108,4 +108,30 @@ Rails.application.configure do
 
     config.textris_delivery_method = [:twilio, :log]
   end
+
+  # set up lograge to send JSON to Google Cloud Logging
+  config.colorized_logging = false
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Raw.new
+
+  exceptions = %w(controller action format id)
+  config.lograge.custom_payload do |controller|
+    {
+      contact_id: controller.current_contact.try(:id),
+      params: controller.request.filtered_parameters.except(*exceptions),
+      user_id: controller.current_user.try(:id),
+    }
+  end
+
+  config.lograge_sql.extract_event = Proc.new do |event|
+    { name: event.payload[:name], duration: event.duration.to_f.round(2), sql: event.payload[:sql] }
+  end
+  config.lograge_sql.formatter = Proc.new do |sql_queries|
+    sql_queries
+  end
+
+  config.to_prepare do
+    # This seems to need Rails boot stuff, so wait to load until after initializers
+    require 'lograge/sql/extension'
+  end
 end

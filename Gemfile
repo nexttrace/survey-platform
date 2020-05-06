@@ -18,6 +18,8 @@ gem "twilio-ruby", "~> 5.33"
 gem "webpacker", "~> 5.1"
 
 group :production do
+  gem "lograge", "~> 0.11.2"
+  gem "lograge-sql", "~> 1.1"
   gem "stackdriver", "~> 0.16.1"
   # Force build stackdriver deps from source via platform, binary gems broken on Alpine
   gem "google-protobuf", "~> 3.12.0.rc.1", platform: [:ruby]
@@ -38,4 +40,3 @@ group :development do
   gem "web-console", ">= 3.3.0"
   gem "letter_opener", "~> 1.7"
 end
-

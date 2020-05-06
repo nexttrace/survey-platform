@@ -27,4 +27,9 @@ private
     stored_location_for(resource) || agency_dashboard_path
   end
 
+  # suppress 404 raised exceptions, log requests instead
+  def route_not_found
+    render 'error_pages/404', status: :not_found
+  end
+
 end
