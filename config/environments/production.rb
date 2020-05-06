@@ -127,18 +127,6 @@ Rails.application.configure do
     { status: event.payload[:status].to_s }
   end
 
-  config.lograge_sql.extract_event = Proc.new do |event|
-    { name: event.payload[:name], duration: event.duration.to_f.round(2), sql: event.payload[:sql] }
-  end
-  config.lograge_sql.formatter = Proc.new do |sql_queries|
-    sql_queries
-  end
-
-  config.to_prepare do
-    # This seems to need Rails boot stuff, so wait to load until after initializers
-    require 'lograge/sql/extension'
-  end
-
   # Google Logging uses this to generate the full log name, e.g.
   # projects/dynamic-return-274121/logs/#{log_name}
   # see also config/initializers/default_url_options.rb
