@@ -123,6 +123,7 @@ Rails.application.configure do
     }
   end
   config.lograge.custom_options = lambda do |event|
+    # Stops Google from showing HTTP 200.0 OK 😂
     { status: event.payload[:status].to_s }
   end
 
@@ -141,5 +142,7 @@ Rails.application.configure do
   # Google Logging uses this to generate the full log name, e.g.
   # projects/dynamic-return-274121/logs/#{log_name}
   # see also config/initializers/default_url_options.rb
-  config.google_cloud.logging.log_name = [config.primary_host, "rails"].join("/")
+  config.after_initialize do |app|
+    app.config.google_cloud.logging.log_name = [config.primary_host, "rails"].join("/")
+  end
 end
