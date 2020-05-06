@@ -19,8 +19,8 @@ gem "webpacker", "~> 5.1"
 
 group :production do
   gem "stackdriver", "~> 0.16.1"
-  # Force building from source via platform, binary gems broken on Alpine
-  gem "google-protobuf", "~> 3.11", platform: [:ruby]
+  # Force build stackdriver deps from source via platform, binary gems broken on Alpine
+  gem "google-protobuf", "~> 3.12.0.rc.1", platform: [:ruby]
   gem "grpc",            "~> 1.28", platform: [:ruby]
 end
 
