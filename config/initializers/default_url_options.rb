@@ -22,20 +22,21 @@ else
   raise "unknown environment"
 end
 
-# Hosts have to be added now, before `after_initialize`
-Rails.configuration.tap do |config|
-  # not a Rails config, but we can use this elsewhere
-  config.primary_host = options[:host]
+# hosts have to be added now because they are used elsewhere immediately
+Rails.application.config.tap do |config|
+  config.primary_host = options[:host] # not Rails config, just for us later
+
   config.hosts << options[:host] unless config.hosts.include?(options[:host])
+
+  config.action_mailer.default_url_options ||= {}
+  config.action_mailer.default_url_options.merge!(options)
+
+  config.action_controller.default_url_options ||= {}
+  config.action_controller.default_url_options.merge!(options)
 end
 
+# routes aren't available until `after_initialize`
 Rails.application.config.after_initialize do |app|
-  app.config.action_mailer.default_url_options ||= {}
-  app.config.action_mailer.default_url_options.merge!(options)
-
-  app.config.action_controller.default_url_options ||= {}
-  app.config.action_controller.default_url_options.merge!(options)
-
   app.routes.default_url_options.merge!(options)
 
   Passwordless::Engine.configure do |engine|
@@ -43,6 +44,7 @@ Rails.application.config.after_initialize do |app|
   end
 end
 
+# ApplicationController.renderer isn't available until `to_prepare`
 Rails.application.config.to_prepare do
   ApplicationController.renderer.defaults.merge!(
     http_host: options[:host],
