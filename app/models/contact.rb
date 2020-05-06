@@ -29,6 +29,8 @@ class Contact < ApplicationRecord
   attr_accessor :found_by # so we can send survey links to the info given to us
 
   def self.fetch_resource_for_passwordless(info)
+    return if info.blank?
+
     find_by_lowercased_email(info)&.tap{|c| c.found_by = "email" } ||
       find_by_normalized_phone(info)&.tap{|c| c.found_by = "phone" }
   end
