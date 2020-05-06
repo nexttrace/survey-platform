@@ -24,8 +24,6 @@ end
 
 # hosts have to be added now because they are used elsewhere immediately
 Rails.application.config.tap do |config|
-  config.primary_host = options[:host] # not Rails config, just for us later
-
   config.hosts << options[:host] unless config.hosts.include?(options[:host])
 
   config.action_mailer.default_url_options ||= {}

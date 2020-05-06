@@ -128,9 +128,8 @@ Rails.application.configure do
   end
 
   # Google Logging uses this to generate the full log name, e.g.
-  # projects/dynamic-return-274121/logs/#{log_name}
+  # projects/dynamic-return-274121/logs/demo.nexttrace.org/rails
   # see also config/initializers/default_url_options.rb
-  config.after_initialize do |app|
-    app.config.google_cloud.logging.log_name = [config.primary_host, "rails"].join("/")
-  end
+  primary_host = ENV.fetch("DEFAULT_URL_HOST", "asset-compilation.example.com")
+  app.config.google_cloud.logging.log_name = [primary_host, "rails"].join("/")
 end
