@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby Pathname.new(".ruby-version").expand_path(__dir__).read.gsub("ruby-", "")
 
-gem "rails", "~> 6.0.2", ">= 6.0.2.2"
+gem "rails", "~> 6.0.3"
 
 gem "bootsnap", ">= 1.4.2", require: false
 gem "city-state", "~> 0.1.0"
