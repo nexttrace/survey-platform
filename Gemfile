@@ -14,7 +14,7 @@ gem "puma", "~> 4.1"
 gem "sendgrid-actionmailer", "~> 3.0"
 gem "textris", "~> 0.7.1", github: "indirect/textris" # fork for Rails 6 compat
 gem "turbolinks", "~> 5"
-gem "twilio-ruby", "~> 5.33"
+gem "twilio-ruby", "~> 5.45"
 gem "webpacker", "~> 5.1"
 
 group :production do
