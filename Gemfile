@@ -21,7 +21,7 @@ group :production do
   gem "lograge", "~> 0.11.2"
   gem "stackdriver", "~> 0.16.1"
   # Force build stackdriver deps from source via platform, binary gems broken on Alpine
-  gem "google-protobuf", "~> 3.12.0.rc.1", platform: [:ruby]
+  gem "google-protobuf", "~> 3.17.1", platform: [:ruby]
   gem "grpc",            "~> 1.28", platform: [:ruby]
 end
 
