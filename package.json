@@ -6,7 +6,7 @@
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "5.1.1",
     "apexcharts": "^3.19.0",
-    "bulma": "^0.8.2",
+    "bulma": "^0.9.3",
     "bulma-o-steps": "^1.0.9",
     "flatpickr": "^4.6.3",
     "jquery": "^3.5.1",
